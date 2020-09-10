@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adote amor</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/jquery-3.5.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src = "js/scripts.js"> </script>
+    
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <header class="cabecalho container-fluid">
@@ -35,6 +41,9 @@
         <li class="nav-item">
             <a class="nav-link" href="sobre.html">Sobre nós</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="pessoas.html">Pessoas</a>
+          </li>
         </ul>
 
         <form class="form-inline col-sm-4 row collapse navbar-collapse" action="">
@@ -58,28 +67,28 @@
                     <div class="form-group row">
                         <label for="exampleInputPassword1" class="col-2 col-form-label text-center">Email:</label>
                         <div class="col-10">
-                            <input type="email" class="form-control" id="exampleInputPassword1" placeholder="exemplo@algo.com">
+                            <input type="email" class="form-control" id="emailLogin" placeholder="exemplo@algo.com" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="exampleInputPassword1" class="col-2 col-form-label text-center">Senha:</label>
                         <div class="col-10">
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Insira sua senha">
+                            <input type="password" class="form-control" id="passwordLogin" placeholder="Insira sua senha" required>
                         </div>
                     </div>
 
-                    <div>
+                    <div id = "divAvisoErro">
                         <a href="#">Esqueci minha senha</a>
-                    </div>
+                    </div >
 
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        <button type="submit" class="btn btn-primary">Entrar</button>
                     </div>
                 </div>
             </form>
 
             <form class="col-6">
-                <div class="card p-4">
+                <div id = "divAdd" class="card p-4">
                     <h1 class="text-center"><i class="fa fa-user-plus" aria-hidden="true"></i> Cadastrar</h1>
                     <hr>
                     <div class="form-group row">
@@ -91,36 +100,36 @@
                     <div class="form-group row">
                         <label for="exampleInputPassword1" class="col-4 col-form-label text-center">Primeiro Nome:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Insira seu primeiro nome">
+                            <input type="text" class="form-control" id="primeiroNome" placeholder="Insira seu primeiro nome" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="exampleInputPassword1" class="col-4 col-form-label text-center">Segundo Nome:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Insira seu segundo nome">
+                            <input type="text" class="form-control" id="segundoNome" placeholder="Insira seu segundo nome">
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <label for="exampleInputPassword1" class="col-4 col-form-label text-center">Email:</label>
                         <div class="col-8">
-                            <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Insira seu email">
+                            <input type="email" class="form-control" id="emailCadastro" placeholder="Insira seu email" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="exampleInputPassword1" class="col-4 col-form-label text-center">Nova Senha:</label>
                         <div class="col-8">
-                            <input type="email" class="form-control" id="exampleInputPassword1" aria-describedby="passHelp" placeholder="Insira sua senha">
-                            <small id="passHelp" class="form-text text-muted text-center">Sua senha deve ter mais de 8 caracteres</small>
+                            <input type="password" class="form-control" id="passwordCadastro" aria-describedby="passHelp" placeholder="Insira sua senha" required>
+                            <small id="passHelp" class="form-text text-muted text-center">Sua senha deve ter mais de 8 caracteres incluindo letras e números</small>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="exampleInputPassword1" class="col-4 col-form-label text-center">Telefone:</label>
                         <div class="col-8">
-                            <input type="tel" class="form-control" id="exampleInputPassword1" placeholder="Insira seu telefone">
+                            <input type="tel" class="form-control" id="telefoneCadastro" placeholder="Insira seu telefone">
                         </div>
                     </div>
 
@@ -128,22 +137,22 @@
 
                     <div class="form-group">
                         <label for="inputAddress">Endereço:</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="Rua dos Bobos, nº 0">
+                        <input type="text" class="form-control" id="enderecoCadastro" placeholder="Rua dos Bobos, nº 0" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputAddress">Complemento:</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="Apartamento, casa, etc">
+                        <input type="text" class="form-control" id="complementoCadastro" placeholder="Apartamento, casa, etc">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                           <label for="inputCity">Cidade</label>
-                          <input type="text" class="form-control" id="inputCity">
+                          <input type="text" class="form-control" id="cidadeCadastro" required>
                         </div>
                         <div class="form-group col-md-3">
                           <label for="inputEstado">Estado</label>
-                          <select id="inputEstado" class="form-control">
+                          <select id="estadoCadastro" class="form-control" required>
                             <option selected>Escolher...</option>
                             <option>Ceará</option>
                             <option>Piauí</option>
@@ -151,13 +160,15 @@
                         </div>
                         <div class="form-group col-md-3">
                           <label for="inputCEP">CEP</label>
-                          <input type="text" class="form-control" id="inputCEP">
+                          <input type="text" class="form-control" id="cepCadastro" required>
                         </div>
                     </div>
 
                     <div class=" d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        <button onclick="adicionarPessoas()" type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
+
+                
                 </div>
             </form>
         </div>
