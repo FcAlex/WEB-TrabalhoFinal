@@ -37,7 +37,28 @@ const routes = [
     component: function () {
       return import('../views/Pessoas.vue')
     }
-  }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: function () {
+      return import('../views/Login.vue')
+    }
+  },
+  {
+    path: '/cadastro',
+    name: 'Cadastro',
+    component: function () {
+      return import('../views/Cadastro.vue')
+    }
+  },
+  {
+    path: '/perfilUsuario',
+    name: 'PerfilUsuario',
+    component: function () {
+      return import('../views/PerfilUsuario.vue')
+    }
+  },
 ]
 
 const router = new VueRouter({

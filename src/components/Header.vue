@@ -38,7 +38,7 @@
       </form>
 
       <div class="col-sm-1 justify-content-end collapse navbar-collapse" id="buttonLogin">
-        <a href="login.html" class="nav-link text-white"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+        <a href="/login" class="nav-link text-white"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
       </div>
 
     </nav>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+
 export default {
     name: "Header",
 }
