@@ -1,7 +1,7 @@
 <template>
   <header class="cabecalho container-fluid">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark row">
-      <a class="navbar-brand col-sm-1 logo" href="index.html">
+      <a class="navbar-brand col-sm-1 logo" href="/">
         <img src="../assets/logo_adote.png" alt="Logo">
       </a>
 

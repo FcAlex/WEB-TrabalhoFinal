@@ -4,7 +4,7 @@
     <section id = "principal" class="container text-center p-4">
     
     <h1><i class="fa fa-paw"></i> Encontre pessoas </h1>
-    <div id = "addCards" class="card-columns">
+    <div id = "addCards" class="card-deck">
       <div class="card">
         <img class="card-img-top" src="../assets/pessoas/pessoa.png" alt="Imagem de capa do card">
         <div class="card-body">

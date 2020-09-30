@@ -1,6 +1,6 @@
 <template>
   <div class="carousel-item" :class="first ? active : ''">
-    <img :src="require(`../assets/${imagePath}`)" :alt="imageAlt" width="100%" />
+    <img :src="require(`../assets/carousel/${imagePath}`)" :alt="imageAlt" width="100%" />
     <div class="carousel-caption">
       <h3>{{title}}</h3>
       <p>{{text}}</p>
@@ -13,10 +13,10 @@ export default {
   name: "CarouselItem",
   
   props: {
-    title: String,
-    imagePath: String,
-    imageAlt: String,
-    text: String,
+    title: "",
+    imagePath: "",
+    imageAlt: "",
+    text: "",
     first: false
   },
   data() {
