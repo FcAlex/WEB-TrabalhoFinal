@@ -46,7 +46,7 @@
 											<div class="input-group-prepend">
 												<div class="input-group-text">
 													<i
-														class="fa fa-envelope"
+														:class="animacao"
 														aria-hidden="true"
 													></i>
 												</div>
@@ -55,8 +55,10 @@
 												type="email"
 												class="form-control"
 												id="email"
-												placeholder="Enter email"
+												placeholder="Qual o seu email"
 												required="required"
+												@focus="animacaoEmailFocus()"
+												@blur="animacaoEmailBlur()"
 											/>
 										</div>
 									</div>
@@ -72,13 +74,13 @@
 											<option value="na" selected="">
 												O que você deseja:
 											</option>
-											<option value="service">
+											<option value="ajuda">
 												Ajuda
 											</option>
-											<option value="suggestions">
+											<option value="sugestao">
 												Sugestão
 											</option>
-											<option value="product">
+											<option value="apoio">
 												Apoio
 											</option>
 										</select>
@@ -106,7 +108,7 @@
 										class="btn btn-primary pull-right"
 										id="btnContactUs"
 									>
-										Send Message
+										<i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar Mensagem
 									</button>
 								</div>
 							</div>
@@ -120,7 +122,7 @@
 							alt="Card image cap"
 						/>
 						<div class="card-body">
-							<h5 class="card-title">Envie-nos sua mensagem!</h5>
+							<h5 class="card-title"><i class="fa fa-comments" aria-hidden="true"></i> Envie-nos sua mensagem!</h5>
 							<p class="card-text">
 								Seu feedback é muito importante para nós!
                 A partir dele, saberemos o que podemos melhorar e continuar.
@@ -146,6 +148,19 @@ export default {
 		Header,
 		Footer,
 	},
+	data() {
+		return {
+			animacao: "fa fa-address-card"
+		}
+	},
+	methods: {
+		animacaoEmailFocus() {
+			this.animacao = "fa fa-address-card-o";
+		},
+		animacaoEmailBlur()  {
+			this.animacao = "fa fa-address-card";
+		}
+	}
 };
 </script>
 
