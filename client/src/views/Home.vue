@@ -1,11 +1,8 @@
 <template>
   <div class="home">
     <Header></Header>
-    
     <Carousel></Carousel>
-
     <Aside></Aside>
-
     <Footer></Footer>
   </div>
 </template>
@@ -23,6 +20,20 @@ export default {
     Footer,
     Carousel,
     Aside
+  },
+  data() {
+    return {
+      data: '',
+      baseURI: "http://localhost:8080/server/api/users",
+    };
+  },
+  created: function() {
+    var user = JSON.parse(localStorage.getItem("user"));
+    if(user) {
+      this.$http.get(this.baseURI + "/" + user.id).then((result) => {
+        this.data = result.data;
+      });
+    }    
   }
 }
 </script>

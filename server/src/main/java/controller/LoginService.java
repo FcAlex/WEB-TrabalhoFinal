@@ -60,11 +60,7 @@ public class LoginService extends HttpServlet {
 				jsonObject.put("estado", user.getEstado());
 				jsonObject.put("cep", user.getCep());
 				
-				HttpSession session = request.getSession();
-				 
-		        if (session.getAttribute("user") == null) {
-		            session.setAttribute("user", user);
-		        }
+				System.out.println(jsonObject.toString());
 				
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");

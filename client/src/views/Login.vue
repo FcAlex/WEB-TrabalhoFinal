@@ -1,9 +1,9 @@
 <template>
 	<div class="login">
 		<Header></Header>
-		<section class="container p-4 principal" @submit="fazerLogin">
+		<section class="container p-4 principal">
 			<div class="d-flex justify-content-center h-100">
-				<form class="col-6">
+				<form class="col-6" @submit="fazerLogin">
 					<div class="card p-4">
 						<h1 class="text-center">
 							<i class="fa fa-user" aria-hidden="true"></i> Entrar
@@ -74,6 +74,7 @@
 <script>
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
+import auth from "../auth";
 
 export default {
 	name: "Login",
@@ -86,28 +87,24 @@ export default {
 			email: "",
       password: "",
       data: Object,
-			logado: false,
-			baseURI: "http://localhost:8080/projeto/api/users/login",
+			baseURI: "http://localhost:8080/server/api/users",
 		};
 	},
+	created: function() {
+    if(localStorage.getItem("user")) {
+				//localStorage.removeItem('user')
+        this.$router.replace("/");
+    }
+  },
 	methods: {
 		fazerLogin: function () {
 			let obj = {
 				email: this.email,
 				password: this.password,
 			};
-
-			this.$http.post(this.baseURI, obj).then((result) => {
-				if (result.status == 200) {
-          alert(result.data.email);
-					this.data = result.data;
-					location.reload();
-				} else {
-					alert("ERRO"); // criar modal de erro
-				}
-			});
+			auth.login(this, obj);
 		},
-	},
+	}
 };
 </script>
 

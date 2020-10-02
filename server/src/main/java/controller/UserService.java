@@ -67,11 +67,16 @@ public class UserService extends HttpServlet {
 				JSONObject jsonObject = new JSONObject();
 				
 				jsonObject.put("id", user.getId());
-				jsonObject.put("login", user.getEmail());
+				jsonObject.put("email", user.getEmail());
 				jsonObject.put("password", user.getPassword());
-				jsonObject.put("id", user.getId());
-				jsonObject.put("login", user.getEmail());
-				jsonObject.put("password", user.getPassword());
+				jsonObject.put("firstName", user.getFirstName());
+				jsonObject.put("lastName", user.getLastName());
+				jsonObject.put("telefone", user.getTelefone());
+				jsonObject.put("endereco", user.getEndereco());
+				jsonObject.put("complemento", user.getComplemento());
+				jsonObject.put("cidade", user.getCidade());
+				jsonObject.put("estado", user.getEstado());
+				jsonObject.put("cep", user.getCep());
 				
 				response.setContentType("application/json"); // informando o mime
 				response.setCharacterEncoding("UTF-8"); // informando a codificacao
@@ -92,8 +97,16 @@ public class UserService extends HttpServlet {
 				JSONObject jsonObject = new JSONObject(); // cria um objeto json
 				
 				jsonObject.put("id", user.getId());
-				jsonObject.put("login", user.getEmail());
+				jsonObject.put("email", user.getEmail());
 				jsonObject.put("password", user.getPassword());
+				jsonObject.put("firstName", user.getFirstName());
+				jsonObject.put("lastName", user.getLastName());
+				jsonObject.put("telefone", user.getTelefone());
+				jsonObject.put("endereco", user.getEndereco());
+				jsonObject.put("complemento", user.getComplemento());
+				jsonObject.put("cidade", user.getCidade());
+				jsonObject.put("estado", user.getEstado());
+				jsonObject.put("cep", user.getCep());
 				
 				// pode usar o gson para simplificar isso: https://github.com/google/gson/blob/master/UserGuide.md
 				
@@ -128,10 +141,17 @@ public class UserService extends HttpServlet {
 			user = UserDAO.addUser(jsonObject.getString("login"), jsonObject.getString("password"));
 			
 			// Response
-			jsonObject = new JSONObject();
 			jsonObject.put("id", user.getId());
-			jsonObject.put("login", user.getEmail());
+			jsonObject.put("email", user.getEmail());
 			jsonObject.put("password", user.getPassword());
+			jsonObject.put("firstName", user.getFirstName());
+			jsonObject.put("lastName", user.getLastName());
+			jsonObject.put("telefone", user.getTelefone());
+			jsonObject.put("endereco", user.getEndereco());
+			jsonObject.put("complemento", user.getComplemento());
+			jsonObject.put("cidade", user.getCidade());
+			jsonObject.put("estado", user.getEstado());
+			jsonObject.put("cep", user.getCep());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -166,10 +186,17 @@ public class UserService extends HttpServlet {
 				user = UserDAO.updateUser(Integer.parseInt(params[1]),jsonObject.getString("login"), jsonObject.getString("password"));
 				
 				// Response
-				jsonObject = new JSONObject();
 				jsonObject.put("id", user.getId());
-				jsonObject.put("login", user.getEmail());
+				jsonObject.put("email", user.getEmail());
 				jsonObject.put("password", user.getPassword());
+				jsonObject.put("firstName", user.getFirstName());
+				jsonObject.put("lastName", user.getLastName());
+				jsonObject.put("telefone", user.getTelefone());
+				jsonObject.put("endereco", user.getEndereco());
+				jsonObject.put("complemento", user.getComplemento());
+				jsonObject.put("cidade", user.getCidade());
+				jsonObject.put("estado", user.getEstado());
+				jsonObject.put("cep", user.getCep());
 			} catch (Exception e) {
 				// TODO: handle exception
 			}

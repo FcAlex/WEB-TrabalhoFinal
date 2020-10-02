@@ -16,7 +16,8 @@ public class UserDAO {
 	}
 	
 	private static void initUsers() {
-		User user1 = new User(1, "alex@gmail.com", "123");
+		User user1 = new User(1, "alex@gmail.com", "123", "Alex", "Sousa", "88999357058", "Rua dos gaiatos, nr. 512, bairro Boa Nova",
+				"Apt 01", "Independencia", "CE", "63640-000");
 		User user2 = new User(2, "joao@gmail.com", "165453");
 		User user3 = new User(3, "lucas@gmail.com", "12445");
 		
