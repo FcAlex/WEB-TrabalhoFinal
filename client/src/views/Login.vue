@@ -92,7 +92,6 @@ export default {
 	},
 	created: function() {
     if(localStorage.getItem("user")) {
-				//localStorage.removeItem('user')
         this.$router.replace("/");
     }
   },

@@ -64,14 +64,26 @@
 				class="col-sm-1 justify-content-end collapse navbar-collapse"
 				id="buttonLogin"
 			>
-      <ul v-if="logado" class="navbar-nav col-sm-6 justify-content-end collapse navbar-collapse">
-        <li class="nav-item">
-          <a href="/login" @click="sair()" class="nav-link text-white"><i class="fa fa-sign-out"></i></a>
-        </li>
-        <li class="nav-item">
-          <router-link to="/perfilUsuario" class="nav-link text-white"><i class="fa fa-user" aria-hidden="true"></i></router-link>
-        </li>
-      </ul>
+				<ul
+					v-if="logado"
+					class="navbar-nav col-sm-6 justify-content-end collapse navbar-collapse"
+				>
+					<li class="nav-item">
+						<a
+							href="/login"
+							@click="sair()"
+							class="nav-link text-white"
+							><i class="fa fa-sign-out"></i
+						></a>
+					</li>
+					<li class="nav-item">
+						<router-link
+							to="/perfilUsuario"
+							class="nav-link text-white"
+							><i class="fa fa-user" aria-hidden="true"></i
+						></router-link>
+					</li>
+				</ul>
 				<a href="/login" class="nav-link text-white" v-else
 					><i class="fa fa-user-circle-o" aria-hidden="true"></i
 				></a>
@@ -92,13 +104,13 @@ export default {
 	},
 	methods: {
 		sair() {
-      auth.sair();
-      location.reload();
-    }
-  }, 
-  created: function() {
-    auth.estaLogado();
-  }
+			auth.sair();
+			location.reload();
+		},
+	},
+	created: function () {
+		auth.estaLogado();
+	},
 };
 </script>
 

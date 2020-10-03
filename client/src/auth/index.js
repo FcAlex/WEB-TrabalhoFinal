@@ -1,6 +1,6 @@
 const URI = "http://localhost:8080/server/";
 const LOGIN = URI + "api/users/login"
-const SIGN = URI + "api/users/create"
+const SIGN = URI + "api/users"
 
 export default {
   user: {
@@ -9,7 +9,7 @@ export default {
 
   login(contexto, obj) {
     contexto.$http.post(LOGIN, obj).then((result) => {
-        localStorage.setItem("user", JSON.stringify(result.data));
+        localStorage.setItem("user", result.data.id);
         this.user.logado = true;
     }).catch((error) => {
       alert(error);
@@ -19,7 +19,7 @@ export default {
 
   criarConta(contexto, obj) {
     contexto.$http.post(SIGN, obj).then((result) => {
-      localStorage.setItem("user", JSON.stringify(result.data));
+      localStorage.setItem("user", result.data.id);
       this.user.logado = true;
     }).catch((error) => {
       alert(error); // todo

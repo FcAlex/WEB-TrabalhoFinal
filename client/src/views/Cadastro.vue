@@ -3,7 +3,7 @@
 		<Header></Header>
 
 		<section class="container p-4 principal">
-			<form class="d-flex justify-content-center h-100">
+			<form class="d-flex justify-content-center h-100" @submit="cadastrar">
 				<div id="divAdd" class="card p-4">
 					<h1 class="text-center">
 						<i class="fa fa-user-plus" aria-hidden="true"></i>
@@ -20,7 +20,7 @@
 						<label
 							for="exampleInputPassword1"
 							class="col-4 col-form-label text-center"
-							>Primeiro Nome:</label
+							>Primeiro Nome: *</label
 						>
 						<div class="col-8">
 							<input
@@ -28,6 +28,7 @@
 								class="form-control"
 								id="primeiroNome"
 								placeholder="Insira seu primeiro nome"
+								v-model="firstName"
 								required
 							/>
 						</div>
@@ -37,7 +38,7 @@
 						<label
 							for="exampleInputPassword1"
 							class="col-4 col-form-label text-center"
-							>Segundo Nome:</label
+							>Segundo Nome: *</label
 						>
 						<div class="col-8">
 							<input
@@ -45,6 +46,8 @@
 								class="form-control"
 								id="segundoNome"
 								placeholder="Insira seu segundo nome"
+								v-model="lastName"
+								required
 							/>
 						</div>
 					</div>
@@ -62,6 +65,7 @@
 								id="emailCadastro"
 								placeholder="Insira seu email"
 								required
+								v-model="email"
 							/>
 						</div>
 					</div>
@@ -80,6 +84,7 @@
 								aria-describedby="passHelp"
 								placeholder="Insira sua senha"
 								required
+								v-model="senha"
 							/>
 							<small
 								id="passHelp"
@@ -102,6 +107,7 @@
 								class="form-control"
 								id="telefoneCadastro"
 								placeholder="Insira seu telefone"
+								v-model="telefone"
 							/>
 						</div>
 					</div>
@@ -116,6 +122,7 @@
 							id="enderecoCadastro"
 							placeholder="Rua dos Bobos, nº 0"
 							required
+							v-model="endereco"
 						/>
 					</div>
 
@@ -126,6 +133,7 @@
 							class="form-control"
 							id="complementoCadastro"
 							placeholder="Apartamento, casa, etc"
+							v-model="complemento"
 						/>
 					</div>
 
@@ -137,6 +145,7 @@
 								class="form-control"
 								id="cidadeCadastro"
 								required
+								v-model="cidade"
 							/>
 						</div>
 						<div class="form-group col-md-3">
@@ -145,10 +154,11 @@
 								id="estadoCadastro"
 								class="form-control"
 								required
+								v-model="estado"
 							>
 								<option selected>Escolher...</option>
-								<option>Ceará</option>
-								<option>Piauí</option>
+								<option value="CE">Ceará</option>
+								<option value="PI">Piauí</option>
 							</select>
 						</div>
 						<div class="form-group col-md-3">
@@ -158,13 +168,13 @@
 								class="form-control"
 								id="cepCadastro"
 								required
+								v-model="cep"
 							/>
 						</div>
 					</div>
 
 					<div class="d-flex justify-content-end">
 						<button
-							@click="cadastrar"
 							type="submit"
 							class="btn btn-primary"
 						>
@@ -182,6 +192,7 @@
 <script>
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
+import auth from "../auth"
 
 export default {
 	name: "Cadastro",
@@ -189,8 +200,36 @@ export default {
 		Header,
 		Footer,
 	},
+	data() {
+		return {
+			firstName: "",
+			lastName: "",
+			email: "",
+			senha: "",
+			telefone: "",
+			endereco: "",
+			complemento: "",
+			cidade: "",
+			estado: "",
+			cep: ""
+		}
+	},
 	methods: {
 		cadastrar: function () {
+			let obj = {
+				firstName: this.firstName,
+				lastName: this.lastName,
+				email: this.email,
+				senha: this.senha,
+				telefone: this.telefone,
+				endereco: this.endereco,
+				complemento: this.complemento,
+				cidade: this.cidade,
+				estado: this.estado,
+				cep: this.cep
+			}
+
+			auth.criarConta(this, obj);
 			this.$router.replace("/perfilUsuario");
 		},
 	},
