@@ -15,18 +15,27 @@ public class UserDbDAO {
 
 	private static Connection connection = DbUtil.getConnection();
 
-	public static User addUser(String email, String password) { // adicionar os outros atributos
+	public static User addUser(String email, String senha, String firstName, String lastName, String telefone, String endereco, String complemento, String cidade, String estado, String cep) { // adicionar os outros atributos
 		try {
 			// para persistir no banco
-			PreparedStatement pStmt = connection.prepareStatement("insert into users(email, password) values (?, ?)",
-					Statement.RETURN_GENERATED_KEYS);
+			String insert = "insert into users(email, senha, \"firstName\", \"lastName\", telefone, endereco, complemento, cidade, estado, cep) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement pStmt = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
 			pStmt.setString(1, email);
-			pStmt.setString(2, password);
+			pStmt.setString(2, senha);
+			pStmt.setString(3, firstName);
+			pStmt.setString(4, lastName);
+			pStmt.setString(5, telefone);
+			pStmt.setString(6, endereco);
+			pStmt.setString(7, complemento);
+			pStmt.setString(8, cidade);
+			pStmt.setString(9, estado);
+			pStmt.setString(10, cep);
 			pStmt.executeUpdate(); // alterar tabela
 			// para retornar ao user
+			
 			ResultSet rs = pStmt.getGeneratedKeys();
 			if (rs.next()) {
-				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"));
+				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -35,17 +44,17 @@ public class UserDbDAO {
 		return null;
 	}
 
-	public static User updateUser(int id, String email, String password) {
+	public static User updateUser(int id, String email, String senha) {
 		try {
-			PreparedStatement pStmt = connection.prepareStatement("update users set email=?, password=? where id=?",
+			PreparedStatement pStmt = connection.prepareStatement("update users set email=?, senha=? where id=?",
 					Statement.RETURN_GENERATED_KEYS);
 			pStmt.setString(1, email);
-			pStmt.setString(2, password);
+			pStmt.setString(2, senha);
 			pStmt.setInt(3, id);
 			pStmt.executeUpdate();
 			ResultSet rs = pStmt.getGeneratedKeys();
 			if (rs.next()) {
-				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"));
+				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,7 +79,7 @@ public class UserDbDAO {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from users order by id");
 			while (rs.next()) {
-				User user = new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"));
+				User user = new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"));
 				users.add(user);
 			}
 		} catch (SQLException e) {
@@ -86,7 +95,7 @@ public class UserDbDAO {
 			pStmt.setInt(1, id);
 			ResultSet rs = pStmt.executeQuery(); // executar busca
 			if (rs.next()) {
-				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"));
+				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -101,7 +110,7 @@ public class UserDbDAO {
 			pStmt.setString(1, email);
 			ResultSet rs = pStmt.executeQuery();
 			if (rs.next()) {
-				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"));
+				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -110,14 +119,14 @@ public class UserDbDAO {
 		return null;
 	}
 
-	public static User getUserByLogin(String email, String password) {
+	public static User getUserByLogin(String email, String senha) {
 		try {
-			PreparedStatement pStmt = connection.prepareStatement("select * from users where email=? and password=?");
+			PreparedStatement pStmt = connection.prepareStatement("select * from users where email=? and senha=?");
 			pStmt.setString(1, email);
-			pStmt.setString(2, password);
+			pStmt.setString(2, senha);
 			ResultSet rs = pStmt.executeQuery();
 			if(rs.next()) {
-				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"));
+				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

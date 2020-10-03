@@ -2,14 +2,14 @@ package model;
 
 public class User {
 	int id;
-	String email, password, firstName, lastName, telefone, endereco, complemento, cidade, estado, cep;
+	String email, senha, firstName, lastName, telefone, endereco, complemento, cidade, estado, cep;
 	
-	public User(int id, String email, String password, String firstName, String lastName, String telefone,
+	public User(int id, String email, String senha, String firstName, String lastName, String telefone,
 			String endereco, String complemento, String cidade, String estado, String cep) {
 		super();
 		this.id = id;
 		this.email = email;
-		this.password = password;
+		this.senha = senha;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.telefone = telefone;
@@ -20,16 +20,16 @@ public class User {
 		this.cep = cep;
 	}
 	
-	public User(int id, String email, String password) {
+	public User(int id, String email, String senha) {
 		super();
 		this.id = id;
 		this.email = email;
-		this.password = password;
+		this.senha = senha;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
+		return "User [id=" + id + ", email=" + email + ", senha=" + senha + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", telefone=" + telefone + ", endereco=" + endereco + ", complemento="
 				+ complemento + ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep + "]";
 	}
@@ -50,12 +50,12 @@ public class User {
 		this.email = email;
 	}
 	
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
 	
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 	public String getFirstName() {

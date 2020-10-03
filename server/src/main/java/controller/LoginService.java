@@ -39,7 +39,7 @@ public class LoginService extends HttpServlet {
 		try {
 			// Request
 			jsonObject = new JSONObject(jb.toString());
-			user = UserDbDAO.getUserByLogin(jsonObject.getString("email"), jsonObject.getString("password"));
+			user = UserDbDAO.getUserByLogin(jsonObject.getString("email"), jsonObject.getString("senha"));
 			
 			if(user != null) {
 				
@@ -47,7 +47,7 @@ public class LoginService extends HttpServlet {
 				jsonObject = new JSONObject();
 				jsonObject.put("id", user.getId());
 				jsonObject.put("email", user.getEmail());
-				jsonObject.put("password", user.getPassword());
+				jsonObject.put("senha", user.getSenha());
 				jsonObject.put("firstName", user.getFirstName());
 				jsonObject.put("lastName", user.getLastName());
 				jsonObject.put("telefone", user.getTelefone());

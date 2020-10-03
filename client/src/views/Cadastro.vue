@@ -18,7 +18,7 @@
 
 					<div class="form-group row">
 						<label
-							for="exampleInputPassword1"
+							for="primeiroNome"
 							class="col-4 col-form-label text-center"
 							>Primeiro Nome: *</label
 						>
@@ -36,7 +36,7 @@
 
 					<div class="form-group row">
 						<label
-							for="exampleInputPassword1"
+							for="segundoNome"
 							class="col-4 col-form-label text-center"
 							>Segundo Nome: *</label
 						>
@@ -54,7 +54,7 @@
 
 					<div class="form-group row">
 						<label
-							for="exampleInputPassword1"
+							for="emailCadastro"
 							class="col-4 col-form-label text-center"
 							>Email:</label
 						>
@@ -72,9 +72,9 @@
 
 					<div class="form-group row">
 						<label
-							for="exampleInputPassword1"
+							for="passwordCadastro"
 							class="col-4 col-form-label text-center"
-							>Nova Senha:</label
+							>Sua Senha:</label
 						>
 						<div class="col-8">
 							<input
@@ -214,6 +214,11 @@ export default {
 			cep: ""
 		}
 	},
+	created: function() {
+    if(localStorage.getItem("user")) {
+        this.$router.replace("/");
+    }
+  },
 	methods: {
 		cadastrar: function () {
 			let obj = {
@@ -230,7 +235,7 @@ export default {
 			}
 
 			auth.criarConta(this, obj);
-			this.$router.replace("/perfilUsuario");
+			//this.$router.replace("/perfilUsuario");
 		},
 	},
 };

@@ -65,7 +65,7 @@ public class UserMeDAO {
 		List<User> list = getAllUsers();
 
 		for (User user : list) {
-			if (user.getEmail().equals(login) && user.getPassword().equals(password)) {
+			if (user.getEmail().equals(login) && user.getSenha().equals(password)) {
 				return user;
 			}
 		}
