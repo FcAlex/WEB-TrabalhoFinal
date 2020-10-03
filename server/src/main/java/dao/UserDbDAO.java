@@ -109,4 +109,20 @@ public class UserDbDAO {
 
 		return null;
 	}
+
+	public static User getUserByLogin(String email, String password) {
+		try {
+			PreparedStatement pStmt = connection.prepareStatement("select * from users where email=? and password=?");
+			pStmt.setString(1, email);
+			pStmt.setString(2, password);
+			ResultSet rs = pStmt.executeQuery();
+			if(rs.next()) {
+				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

@@ -3,18 +3,15 @@ package controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import dao.UserMeDAO;
+import dao.UserDbDAO;
 import model.User;
 
 @WebServlet("/api/users/login")
@@ -42,7 +39,7 @@ public class LoginService extends HttpServlet {
 		try {
 			// Request
 			jsonObject = new JSONObject(jb.toString());
-			user = UserMeDAO.getUserByLogin(jsonObject.getString("email"), jsonObject.getString("password"));
+			user = UserDbDAO.getUserByLogin(jsonObject.getString("email"), jsonObject.getString("password"));
 			
 			if(user != null) {
 				
@@ -59,8 +56,6 @@ public class LoginService extends HttpServlet {
 				jsonObject.put("cidade", user.getCidade());
 				jsonObject.put("estado", user.getEstado());
 				jsonObject.put("cep", user.getCep());
-				
-				System.out.println(jsonObject.toString());
 				
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
