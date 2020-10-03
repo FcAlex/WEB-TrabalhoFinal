@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import dao.UserDAO;
+import dao.UserMeDAO;
 import model.User;
 
 @WebServlet("/api/users/login")
@@ -42,7 +42,7 @@ public class LoginService extends HttpServlet {
 		try {
 			// Request
 			jsonObject = new JSONObject(jb.toString());
-			user = UserDAO.getUserByLogin(jsonObject.getString("email"), jsonObject.getString("password"));
+			user = UserMeDAO.getUserByLogin(jsonObject.getString("email"), jsonObject.getString("password"));
 			
 			if(user != null) {
 				

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import dao.UserDAO;
+import dao.UserDbDAO;
 import model.User;
 
 @WebServlet("/api/users/*") // caminho
@@ -33,7 +33,7 @@ public class UserService extends HttpServlet {
 			String[] params = pathInfo.split("/");
 			
 			if(params.length > 0) {
-				User user = UserDAO.getUser(Integer.parseInt(params[1])); // depos do api/user/
+				User user = UserDbDAO.getUser(Integer.parseInt(params[1])); // depos do api/user/
 								
 				if(user != null) {
 					JSONObject jsonObject = new JSONObject(); // cria um objeto json
@@ -61,7 +61,7 @@ public class UserService extends HttpServlet {
 		
 		//GET BY NAME
 		if(request.getParameter("login") != null) {
-			User user = UserDAO.getUserByEmail(request.getParameter("login"));
+			User user = UserDbDAO.getUserByEmail(request.getParameter("login"));
 			
 			if(user != null) {
 				JSONObject jsonObject = new JSONObject();
@@ -88,7 +88,7 @@ public class UserService extends HttpServlet {
 		
 		
 		// GET ALL
-		List<User> list = UserDAO.getAllUsers(); // recuperar todos os elementos
+		List<User> list = UserDbDAO.getAllUsers(); // recuperar todos os elementos
 		
 		try {
 			JSONArray jArray = new JSONArray(); // criar uma array de json
@@ -138,7 +138,7 @@ public class UserService extends HttpServlet {
 		try {
 			// Request
 			jsonObject = new JSONObject(jb.toString());
-			user = UserDAO.addUser(jsonObject.getString("login"), jsonObject.getString("password"));
+			user = UserDbDAO.addUser(jsonObject.getString("login"), jsonObject.getString("password"));
 			
 			// Response
 			jsonObject.put("id", user.getId());
@@ -183,7 +183,7 @@ public class UserService extends HttpServlet {
 			try {
 				// Request
 				jsonObject = new JSONObject(jb.toString());
-				user = UserDAO.updateUser(Integer.parseInt(params[1]),jsonObject.getString("login"), jsonObject.getString("password"));
+				user = UserDbDAO.updateUser(Integer.parseInt(params[1]),jsonObject.getString("login"), jsonObject.getString("password"));
 				
 				// Response
 				jsonObject.put("id", user.getId());
@@ -216,7 +216,7 @@ public class UserService extends HttpServlet {
 			String[] params = pathInfo.split("/");
 			
 			if(params.length > 0) {
-				UserDAO.deleteUser(Integer.parseInt(params[1]));
+				UserDbDAO.deleteUser(Integer.parseInt(params[1]));
 				response.setContentType("application/json"); // informando o mime
 				response.setCharacterEncoding("UTF-8"); // informando a codificacao
 				response.getWriter().flush();

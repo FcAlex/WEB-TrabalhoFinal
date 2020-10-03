@@ -7,7 +7,7 @@ import java.util.Map;
 
 import model.User;
 
-public class UserDAO {
+public class UserMeDAO {
 	private static final Map<Integer, User> userMap = new HashMap<Integer, User>();
 	private static int i = 4;
 	
