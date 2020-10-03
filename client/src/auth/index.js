@@ -1,6 +1,6 @@
 const URI = "http://localhost:8080/server/";
 const LOGIN = URI + "api/users/login"
-const SIGN = URI + "api/users"
+const USER = URI + "api/users"
 
 export default {
   user: {
@@ -9,8 +9,13 @@ export default {
 
   login(contexto, obj) {
     contexto.$http.post(LOGIN, obj).then((result) => {
-        localStorage.setItem("user", result.data.id);
-        this.user.logado = true;
+        if(result.data != '') {
+          localStorage.setItem("user", result.data.id);
+          this.user.logado = true;
+          location.reload();
+        } else {
+          alert("Cadastro Invalido"); // modal erro 
+        }
     }).catch((error) => {
       alert(error);
       contexto.error = error;
@@ -18,11 +23,15 @@ export default {
   },
 
   criarConta(contexto, obj) {
-    contexto.$http.post(SIGN, obj).then((result) => {
-      localStorage.setItem("user", result.data.id);
-      this.user.logado = true;
+    contexto.$http.post(USER, obj).then((result) => {
+      if(result.data != '') {
+        localStorage.setItem("user", result.data.id);
+        this.user.logado = true;
+      } else {
+        alert("Cadastro Invalido"); // modal erro 
+      }
     }).catch((error) => {
-      alert(error); // todo
+      alert(error);
       contexto.error = error;
     });
   },

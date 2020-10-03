@@ -39,8 +39,8 @@ public class LoginService extends HttpServlet {
 		try {
 			// Request
 			jsonObject = new JSONObject(jb.toString());
+			System.out.println(jsonObject.toString());
 			user = UserDbDAO.getUserByLogin(jsonObject.getString("email"), jsonObject.getString("senha"));
-			
 			if(user != null) {
 				
 				// Response
@@ -61,12 +61,9 @@ public class LoginService extends HttpServlet {
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().print(jsonObject.toString());
 				response.getWriter().flush();
-				response.setStatus(200);
-			} else {
-				response.setStatus(401);
 			}
 		} catch (JSONException e) {
-			
+			e.printStackTrace();
 		}
 	}
 }

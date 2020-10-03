@@ -35,7 +35,7 @@ public class UserDbDAO {
 			
 			ResultSet rs = pStmt.getGeneratedKeys();
 			if (rs.next()) {
-				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"));
+				return returnUserResultSet(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -54,7 +54,7 @@ public class UserDbDAO {
 			pStmt.executeUpdate();
 			ResultSet rs = pStmt.getGeneratedKeys();
 			if (rs.next()) {
-				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"));
+				return returnUserResultSet(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,7 +79,7 @@ public class UserDbDAO {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from users order by id");
 			while (rs.next()) {
-				User user = new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"));
+				User user = returnUserResultSet(rs);
 				users.add(user);
 			}
 		} catch (SQLException e) {
@@ -95,7 +95,7 @@ public class UserDbDAO {
 			pStmt.setInt(1, id);
 			ResultSet rs = pStmt.executeQuery(); // executar busca
 			if (rs.next()) {
-				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"));
+				return returnUserResultSet(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -110,13 +110,20 @@ public class UserDbDAO {
 			pStmt.setString(1, email);
 			ResultSet rs = pStmt.executeQuery();
 			if (rs.next()) {
-				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"));
+				return returnUserResultSet(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		return null;
+	}
+
+	private static User returnUserResultSet(ResultSet rs) throws SQLException {
+		return new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"),
+				rs.getString("firstName"), rs.getString("lastName"), rs.getString("telefone"),
+				rs.getString("endereco"), rs.getString("complemento"), rs.getString("cidade"),
+				rs.getString("estado"), rs.getString("cep"));
 	}
 
 	public static User getUserByLogin(String email, String senha) {
@@ -126,7 +133,7 @@ public class UserDbDAO {
 			pStmt.setString(2, senha);
 			ResultSet rs = pStmt.executeQuery();
 			if(rs.next()) {
-				return new User(rs.getInt("id"), rs.getString("email"), rs.getString("senha"));
+				return returnUserResultSet(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

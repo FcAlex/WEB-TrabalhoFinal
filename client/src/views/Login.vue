@@ -29,7 +29,7 @@
 
 						<div class="form-group row my-2">
 							<label
-								for="passwordLogin"
+								for="senhaLogin"
 								class="col-2 col-form-label text-center"
 								>Senha:</label
 							>
@@ -37,9 +37,9 @@
 								<input
 									type="password"
 									class="form-control"
-									id="passwordLogin"
+									id="senhaLogin"
 									placeholder="Insira sua senha"
-                  v-model="password"
+                  v-model="senha"
 									required
 								/>
 							</div>
@@ -85,7 +85,7 @@ export default {
 	data() {
 		return {
 			email: "",
-      password: "",
+      senha: "",
       data: Object,
 			baseURI: "http://localhost:8080/server/api/users",
 		};
@@ -99,7 +99,7 @@ export default {
 		fazerLogin: function () {
 			let obj = {
 				email: this.email,
-				password: this.password,
+				senha: this.senha,
 			};
 			auth.login(this, obj);
 		},

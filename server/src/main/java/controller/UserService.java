@@ -26,13 +26,13 @@ public class UserService extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// GET BY ID
-		
 		String pathInfo = request.getPathInfo();
 		
 		if(pathInfo != null) {
 			String[] params = pathInfo.split("/");
 			
 			if(params.length > 0) {
+			
 				User user = UserDbDAO.getUser(Integer.parseInt(params[1])); // depos do api/user/
 								
 				if(user != null) {
@@ -124,6 +124,8 @@ public class UserService extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println("Ok");
 		StringBuilder jb = new StringBuilder();
 		String line = null;
 		try {

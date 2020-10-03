@@ -1,9 +1,9 @@
 <template>
 	<header class="cabecalho container-fluid">
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark row">
-			<a class="navbar-brand col-sm-1 logo" href="/">
+			<router-link class="navbar-brand col-sm-1 logo" to="/">
 				<img src="../assets/logo_adote.png" alt="Logo" />
-			</a>
+			</router-link>
 
 			<button
 				class="navbar-toggler nav justify-content-center"
