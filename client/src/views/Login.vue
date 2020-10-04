@@ -46,7 +46,7 @@
 						</div>
 
 						<div class="d-flex justify-content-end my-2">
-							<button type="submit" class="btn btn-primary">
+							<button @click="fazerLogin" type="submit" class="btn btn-primary">
 								Entrar
 							</button>
 						</div>
@@ -85,8 +85,8 @@ export default {
 	data() {
 		return {
 			email: "",
-      senha: "",
-      data: Object,
+      		senha: "",
+      		data: Object,
 			baseURI: "http://localhost:8080/server/api/users",
 		};
 	},

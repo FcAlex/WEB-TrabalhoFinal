@@ -13,6 +13,7 @@ export default {
           localStorage.setItem("user", result.data.id);
           this.user.logado = true;
           location.reload();
+          console.log(result.data);
         } else {
           alert("Cadastro Invalido"); // modal erro 
         }

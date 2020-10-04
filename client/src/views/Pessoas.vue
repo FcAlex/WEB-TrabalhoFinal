@@ -46,7 +46,21 @@
         </div>
       </div>
     </div>
-
+  <ul>
+      <li v-for="user in users" :key="user.id">
+        <div id="geral">
+          <div class="left">
+            <h4>{{ user.id }}</h4>
+            <p>{{ user.email }}</p>
+            <p>{{ user.senha }}</p>
+          </div>
+        </div>
+        <hr />
+      </li>
+    </ul>
+    <button @click="getAll" class="btn btn-primary">
+								Listar 
+							</button>
   </section>
 
     <Footer></Footer>
@@ -63,6 +77,24 @@ export default {
     Header,
     Footer
   },
+  data() {
+		return {
+      users: [],
+      baseURI: "http://localhost:8080/servidor/api/users"
+    };
+  },
+  created: function() {
+			 if(localStorage.getItem("user")) {
+        this.$router.replace("/");
+    }
+  },
+  methods: {
+    getAll: function() {
+			  this.$http.get(this.baseURI).then((result) => {
+				this.users = result.data;
+		  });
+	  }
+  }
 };
 </script>
 

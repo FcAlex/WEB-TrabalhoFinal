@@ -30,7 +30,7 @@ public class UserService extends HttpServlet {
 		
 		if(pathInfo != null) {
 			String[] params = pathInfo.split("/");
-			
+			System.out.println("hello");
 			if(params.length > 0) {
 			
 				User user = UserDbDAO.getUser(Integer.parseInt(params[1])); // depos do api/user/
