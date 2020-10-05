@@ -3,7 +3,7 @@
 		<Header></Header>
 		<section id="principal" class="container text-center p-4">
 			<h1><i class="fa fa-paw"></i> Encontre pessoas</h1>
-
+			<hr class="mt-3 mb-4">
 			<div class="row">
 				<div class="col-4" v-for="user in users" :key="user.id">
 					<div class="card">

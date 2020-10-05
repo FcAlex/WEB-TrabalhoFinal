@@ -51,7 +51,7 @@
 							</button>
 						</div>
 
-						<div id="divAvisoErro" class="my-2">
+						<div id="divAvisoErro" class="my-2 text-center">
 							<p>
 								Não tem uma conta?
 								<span>

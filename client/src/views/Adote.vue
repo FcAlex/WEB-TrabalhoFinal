@@ -3,6 +3,7 @@
 		<Header></Header>
 		<section class="container text-center p-4">
 			<h1><i class="fa fa-paw"></i> Encontre seu novo amigo</h1>
+			<hr class="mt-3 mb-4">
 			<div id="addCardsPets" class="card-deck">
 				<div class="card">
 					<img
