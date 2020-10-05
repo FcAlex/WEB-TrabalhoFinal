@@ -4,12 +4,18 @@
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+export default {
+  created: function() {
+    var user = JSON.parse(localStorage.getItem("user"));
+    if(user) {
+      this.$http.get(this.baseURI + "/" + user).then((result) => {
+        this.data = result.data;
+      });
+    }    
+  }
 }
+</script>
+
+<style>
 </style>

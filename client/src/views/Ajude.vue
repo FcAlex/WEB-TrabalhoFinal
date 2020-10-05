@@ -116,11 +116,11 @@
 					<button
 						onclick="adicionarPets()"
 						type="submit"
-						class="btn btn-success"
+						class="btn btn-success mx-2"
 					>
 						Cadastrar
 					</button>
-					<button type="reset" class="btn btn-secondary">
+					<button type="reset" class="btn btn-secondary mx-2">
 						Limpar
 					</button>
 				</div>

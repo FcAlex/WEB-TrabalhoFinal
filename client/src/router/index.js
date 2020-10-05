@@ -59,6 +59,13 @@ const routes = [
       return import('../views/PerfilUsuario.vue')
     }
   },
+  {
+    path: '/perfilPet',
+    name: 'perfilPet',
+    component: function () {
+      return import('../views/PerfilPet.vue')
+    }
+  },
 ]
 
 const router = new VueRouter({

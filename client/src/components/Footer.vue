@@ -1,6 +1,7 @@
 <template>
 	<footer
-		class="container-fluid page-footer font-small bg-success text-white pt-4"
+		class="container-fluid font-small bg-success text-white pt-4"
+		:class="fixed"
 	>
 		<div class="text-left">
 			<div class="row">
@@ -62,7 +63,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+	props: {
+		fixed: ""
+	},
+};
 </script>
 
 <style>
