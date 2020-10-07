@@ -11,7 +11,7 @@
 							class="card-img-top rounded mx-auto d-block mt-2"
 							src="../assets/pessoas/pessoa.png"
 							alt="Imagem de capa do card"
-              style="max-width: 250px"
+              				style="max-width: 250px"
 						/>
 
 						<div class="card-body">
