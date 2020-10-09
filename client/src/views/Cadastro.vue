@@ -231,10 +231,6 @@ export default {
 	},
 	methods: {
 		cadastrar: function () {
-			/*if (!cadastroValido()) {
-				alert("ERRO");
-				return;
-			}*/
 			let obj = {
 				firstName: this.firstName,
 				lastName: this.lastName,
@@ -248,10 +244,7 @@ export default {
 				cep: this.cep,
 			};
 
-			alert("OK");
-
-			//auth.criarConta(this, obj);
-			//this.$router.replace("/perfilUsuario");
+			auth.criarConta(this, obj);
 		},
 		validarSenha: function () {
 			var regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -274,8 +267,4 @@ export default {
 </script>
 
 <style>
-.form-sucess:focus {
-	border-color: #28a745;
-	box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
-}
 </style>
