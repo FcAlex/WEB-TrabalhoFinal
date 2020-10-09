@@ -6,12 +6,16 @@
 				<div class="col-4 d-flex justify-content-center">
 					<div>
 						<img
-							src="https://bootdey.com/img/Content/avatar/avatar6.png"
+							:src="'uploads/user/' + data.id"
 							class="rounded-circle img-thumbnail profile"
 							alt="Imagem do Usuário"
+							onerror="this.src='static/pessoa.png'"
 						/>
 						<div class="d-flex justify-content-center">
-							<label for="image" class="badge badge-info p-2 m-2" style="cursor: pointer;"
+							<label
+								for="image"
+								class="badge badge-info p-2 m-2"
+								style="cursor: pointer"
 								><i class="fa fa-camera" aria-hidden="true"></i>
 								Alterar Imagem</label
 							>
@@ -19,8 +23,10 @@
 								class="file-upload d-none"
 								id="image"
 								type="file"
-								@change="selecionarImagem"
+								name="image"
+								ref="image"
 								accept="image/*"
+								@change="selecionarImagem()"
 							/>
 						</div>
 					</div>
@@ -120,7 +126,8 @@
 				</div>
 			</div>
 		</section>
-		<Footer fixed="fixed-bottom"></Footer>
+
+		<Footer></Footer>
 	</div>
 </template>
 
@@ -137,14 +144,48 @@ export default {
 	},
 	data() {
 		return {
-			data: [],
+			file: null,
+			data: "",
 			baseURI: "http://localhost:8080/server/api/users",
+			baseUploadURI: "http://localhost:8080/server/upload",
 		};
 	},
 	methods: {
-		selecionarImagem(event) {
-			console.log(event);
-		}
+		selecionarImagem() {
+			this.$http.put(this.baseURI, this.data).then((result) => {
+				console.log(result);
+				this.handleFileUpload(this.data.id);
+			});
+		},
+		handleFileUpload(id, update) {
+			console.log(this.$refs.image.files[0]);
+			this.file = this.$refs.image.files[0];
+
+			let obj = {
+				resource: "user",
+				id: id,
+			};
+			let json = JSON.stringify(obj);
+
+			let form = new FormData();
+			form.append("obj", json);
+			form.append("file", this.file);
+
+			this.$http
+				.post(this.baseUploadURI, form, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				})
+				.then((result) => {
+					console.log(result);
+				});
+		},
+	},
+	computed: {
+		image() {
+			return "uploads/user/'+" + this.data.id;
+		},
 	},
 	created: function () {
 		var user = JSON.parse(localStorage.getItem("user"));
@@ -159,7 +200,9 @@ export default {
  
 <style>
 .profile {
-	max-width: 250px;
-	max-height: 250px;
+	width: 250px;
+	height: 250px;
+	object-fit: cover;
+	object-position: top;
 }
 </style>

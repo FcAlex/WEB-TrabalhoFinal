@@ -89,6 +89,7 @@ public class UserService extends HttpServlet {
 		
 		// GET ALL
 		List<User> list = UserDbDAO.getAllUsers(); // recuperar todos os elementos
+		System.out.println("---------------------------");
 		
 		try {
 			JSONArray jArray = new JSONArray(); // criar uma array de json
@@ -125,7 +126,7 @@ public class UserService extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("Ok");
+		
 		StringBuilder jb = new StringBuilder();
 		String line = null;
 		try {

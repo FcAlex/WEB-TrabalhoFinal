@@ -3,15 +3,15 @@
 		<Header></Header>
 		<section id="principal" class="container text-center p-4">
 			<h1><i class="fa fa-paw"></i> Encontre pessoas</h1>
-			<hr class="mt-3 mb-4">
+			<hr class="mt-3 mb-4" />
 			<div class="row">
 				<div class="col-4" v-for="user in users" :key="user.id">
-					<div class="card">
+					<div class="card mb-4">
 						<img
-							class="card-img-top rounded mx-auto d-block mt-2"
-							src="../assets/pessoas/pessoa.png"
-							alt="Imagem de capa do card"
-              				style="max-width: 250px"
+							class="card-img-top rounded mx-auto d-block mt-2 rounded-circle img-thumbnail usuario"
+							:src="'uploads/user/' + user.id"
+							:alt="'Image do Usuario ' + user.firstName"
+							onerror="this.src='static/pessoa.png'"
 						/>
 
 						<div class="card-body">
@@ -64,8 +64,22 @@ export default {
 			this.users = result.data;
 		});
 	},
+	methods: {
+		imagemPadrao(event) {
+			event.target.src = 'https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png';
+		},
+		print(e) {
+			console.log(e)
+		}
+	},
 };
 </script>
 
 <style>
+img.usuario {
+	width: 250px;
+	height: 250px;
+	object-fit: cover;
+	object-position: top;
+}
 </style>
