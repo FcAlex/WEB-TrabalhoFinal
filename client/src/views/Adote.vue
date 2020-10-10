@@ -7,10 +7,11 @@
 			<div id="addCardsPets" class="row">
 				<div class="col-4" v-for="pet in pets" :key="pet.id">
 					<div class="card mb-2">
-						<img
-							class="card-img-top rounded mx-auto d-block rounded mt-2 usuario"
-							src="../assets/dog_example_1.jpg"
-							alt="Imagem de capa do card"
+						<img 
+							:src="'uploads/pet/' + pet.id"
+							class="rounded-circle img-thumbnail profile"
+							alt="Imagem do Usuário"
+							onerror="this.src='static/adote_logo.png'"
 						/>
 
 						<div class="card-body">

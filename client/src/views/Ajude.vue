@@ -89,9 +89,12 @@
 							<div class="custom-file">
 								<input
 									type="file"
+									name="image"
 									class="custom-file-input"
 									id="inputGroupFile04"
 									aria-describedby="inputGroupFileAddon04"
+									ref="file"
+									accept="image/*"
 								/>
 								<label
 									class="custom-file-label"
@@ -104,9 +107,7 @@
 						<div class="p-2 bd-highlight">
 							<div class="card" style="width: 18rem">
 								<img
-									class="card-img-top"
-									src="../assets/padrao_capa.png"
-									alt="Imagem de capa do card"
+									v-if="pet.id" card-img-top :src="'uploads/pet/'+ pet.id "
 								/>
 								<div class="card-footer">
 									<p class="card-text">
@@ -173,7 +174,10 @@ export default {
 			caracteristicas: "",
 			historia: "",
 			id_user: "",
-			baseURI: "http://localhost:8080/server/api/pets"
+			baseURI: "http://localhost:8080/server/api/pets",
+			baseUploadURI: "http://localhost:8080/server/upload",
+			file: null,
+			pet: {},
 		};
 	},
 	created: function(){
@@ -198,6 +202,9 @@ export default {
 				this.$http.post(this.baseURI, obj).then((result) => {
 					if (result.data != "") {
 						alert("Cadastrado")
+						console.log(result);
+						this.pet = result.data;
+						this.handleFileUpload(this.pet.id);
 					}
 				});
 			}else{
@@ -205,8 +212,37 @@ export default {
 				
 			}
 			location.reload();
-		}
-	}
+		},
+		handleFileUpload(id) {
+			alert(id);
+			this.file = this.$refs.file.files[0];
+
+			let obj = {
+				resource: "pet",
+				id: id,
+			};
+			let json = JSON.stringify(obj);
+
+			let form = new FormData();
+			form.append("obj", json);
+			form.append("file", this.file);
+
+			this.$http
+				.post(this.baseUploadURI, form, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				})
+				.then((result) => {
+					console.log(result);
+				});
+		},
+	},
+	computed: {
+		image() {
+			return "uploads/pet/'+" + this.pet.id;
+		},
+	},
 };
 </script>
 
