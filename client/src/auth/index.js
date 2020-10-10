@@ -25,7 +25,7 @@ export default {
   criarConta(contexto, obj) {
     contexto.$http.post(USER, obj).then((result) => {
       if(result.data != '') {
-        localStorage.setItem("user", result.data.id);
+        localStorage.setItem("user", result.data);
         this.user.logado = true;
       } else {
         alert("Cadastro Invalido"); // modal erro 
