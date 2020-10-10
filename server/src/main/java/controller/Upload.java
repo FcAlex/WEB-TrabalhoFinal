@@ -35,7 +35,9 @@ public class Upload extends HttpServlet {
 
 		String resource = jsonObject.getString("resource");
 		int id = jsonObject.getInt("id");
-
+		
+		System.out.println(resource + "===================");
+		
 		FileUtil.uploadFile(fileContent, resource, ""+id);
 
 		response.getWriter().flush();

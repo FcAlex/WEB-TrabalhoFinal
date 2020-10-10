@@ -224,7 +224,6 @@ export default {
 			});
 		},
 		handleFileUpload(id) {
-			console.log(this.$refs.image.files[0]);
 			this.file = this.$refs.image.files[0];
 
 			let obj = {

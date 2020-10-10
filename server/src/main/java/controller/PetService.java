@@ -138,7 +138,6 @@ public class PetService extends HttpServlet {
 		try {
 			// Request
 			jsonObject = new JSONObject(jb.toString());
-			System.out.println(jsonObject.getInt("id_user"));
 			pet = PetDbDAO.addPet(jsonObject.getString("nome"), jsonObject.getString("raca"),
 					jsonObject.getString("porte"), jsonObject.getString("sexo"),
 					jsonObject.getString("caracteristicas"), jsonObject.getString("historia"),

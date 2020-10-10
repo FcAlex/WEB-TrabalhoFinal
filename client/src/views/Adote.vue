@@ -9,9 +9,9 @@
 					<div class="card mb-2">
 						<img 
 							:src="'uploads/pet/' + pet.id"
-							class="rounded-circle img-thumbnail profile"
+							class="rounded-circle img-thumbnail usuario mx-auto d-block"
 							alt="Imagem do Usuário"
-							onerror="this.src='static/adote_logo.png'"
+							onerror="this.src='static/pet.png'"
 						/>
 
 						<div class="card-body">

@@ -39,7 +39,6 @@ public class LoginService extends HttpServlet {
 		try {
 			// Request
 			jsonObject = new JSONObject(jb.toString());
-			System.out.println(jsonObject.toString());
 			user = UserDbDAO.getUserByLogin(jsonObject.getString("email"), jsonObject.getString("senha"));
 			if(user != null) {
 				
