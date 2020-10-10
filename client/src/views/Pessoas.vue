@@ -11,7 +11,7 @@
 							class="card-img-top rounded mx-auto d-block mt-2 rounded-circle img-thumbnail usuario"
 							:src="'uploads/user/' + user.id"
 							:alt="'Image do Usuario ' + user.firstName"
-							onerror="this.src='static/pessoa.png'"
+							@error="imagemPadrao"
 						/>
 
 						<div class="card-body">

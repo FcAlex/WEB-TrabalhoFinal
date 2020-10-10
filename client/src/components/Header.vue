@@ -15,7 +15,7 @@
 			</button>
 
 			<ul
-				class="navbar-nav col-6 justify-content-end collapse navbar-collapse"
+				class="navbar-nav col-7 justify-content-end collapse navbar-collapse"
 				id="collapsibleNavbar"
 			>
 				<li class="nav-item">
@@ -48,7 +48,7 @@
 				</li>
 			</ul>
 
-			<div class="form-inline col-4 collapse navbar-collapse d-flex justify-content-start">
+			<div class="form-inline col-3 collapse navbar-collapse d-flex justify-content-start">
 				<div class="input-group">
 					<input
 						class="form-control"

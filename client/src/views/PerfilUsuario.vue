@@ -9,7 +9,8 @@
 							:src="'uploads/user/' + data.id"
 							class="rounded-circle img-thumbnail profile"
 							alt="Imagem do Usuário"
-							onerror="this.src='static/pessoa.png'"
+							ref="imagePadrao"
+							@error="imagemPadrao()"
 						/>
 						<div class="d-flex justify-content-center">
 							<label
@@ -113,6 +114,8 @@
 								<button
 									type="button"
 									class="btn btn-danger mx-2"
+									data-toggle="modal"
+									data-target="#deletarConta"
 								>
 									<i
 										class="fa fa-exclamation-triangle"
@@ -120,6 +123,69 @@
 									></i>
 									Deletar conta
 								</button>
+
+								<div class="modal fade" id="deletarConta">
+									<div
+										class="modal-dialog modal-dialog-centered"
+										role="document"
+									>
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5
+													class="modal-title"
+													id="exampleModalLongTitle"
+												>
+													Você realmente deseja isso?
+													<i
+														class="fa fa-frown-o"
+														aria-hidden="true"
+													></i>
+												</h5>
+												<button
+													type="button"
+													class="close"
+													data-dismiss="modal"
+													aria-label="Close"
+												>
+													<span aria-hidden="true"
+														>&times;</span
+													>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div
+													class="alert alert-danger"
+													role="alert"
+												>
+													<i
+														class="fa fa-exclamation-circle"
+														aria-hidden="true"
+													></i>
+
+													Se você confirmar, todos os
+													seus dados serão perdidos.
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button
+													type="button"
+													class="btn btn-primary"
+													data-dismiss="modal"
+												>
+													Fechar
+												</button>
+												<button
+													type="button"
+													class="btn btn-secondary"
+													@click="deletarConta()"
+													data-dismiss="modal"
+												>
+													Confirmar
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -181,10 +247,19 @@ export default {
 					console.log(result);
 				});
 		},
-	},
-	computed: {
-		image() {
-			return "uploads/user/'+" + this.data.id;
+		deletarConta() {
+			this.$http
+				.delete(this.baseURI + "/" + this.data.id)
+				.then((result) => {
+					auth.sair();
+					this.$router.replace("/");
+				})
+				.catch((e) => {
+					console.log(e);
+				});
+		},
+		imagemPadrao() {
+			this.$refs.imagemPadrao.src = "static/pessoa.png";
 		},
 	},
 	created: function () {
@@ -196,7 +271,7 @@ export default {
 		} else {
 			this.$router.replace("/");
 		}
-	}
+	},
 };
 </script>
  
