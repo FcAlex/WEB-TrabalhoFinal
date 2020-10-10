@@ -157,7 +157,7 @@ export default {
 				this.handleFileUpload(this.data.id);
 			});
 		},
-		handleFileUpload(id, update) {
+		handleFileUpload(id) {
 			console.log(this.$refs.image.files[0]);
 			this.file = this.$refs.image.files[0];
 
@@ -193,8 +193,10 @@ export default {
 			this.$http.get(this.baseURI + "/" + user).then((result) => {
 				this.data = result.data;
 			});
+		} else {
+			this.$router.replace("/");
 		}
-	},
+	}
 };
 </script>
  

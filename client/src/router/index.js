@@ -64,8 +64,21 @@ const routes = [
     name: 'perfilPet',
     component: function () {
       return import('../views/PerfilPet.vue')
-    }
+    },
+    props: true
   },
+  {
+    path: '/buscarPet',
+    name: 'buscarPet',
+    component: function () {
+      return import('../views/BuscarPet.vue')
+    },
+    props: true
+  },
+  {
+    path: "*",
+    redirect: "/"
+  }
 ]
 
 const router = new VueRouter({

@@ -1,5 +1,5 @@
 <template>
-	<div class="adote">
+	<div>
 		<Header></Header>
 		<section class="container text-center p-4">
 			<h1><i class="fa fa-paw"></i> Encontre seu novo amigo</h1>
@@ -41,7 +41,6 @@
 				</div>
 			</div>
 		</section>
-
 		<Footer></Footer>
 	</div>
 </template>
@@ -51,38 +50,32 @@ import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 
 export default {
-	name: "Adote",
+	name: "Buscar",
 	components: {
 		Header,
 		Footer,
 	},
 	data() {
 		return {
-			pets: [],
 			baseURI: "http://localhost:8080/server/api/pets",
+			pets: [],
 		};
 	},
-	created: function () {
-		this.$http.get(this.baseURI).then((result) => {
-			this.pets = result.data;
-		});
+	props: {
+		nomePet: "",
 	},
-	methods: {},
+	created() {
+		this.$http
+			.get(this.baseURI + "?nome=" + this.nomePet)
+			.then((result) => {
+				this.pets = result.data;
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	},
 };
 </script>
 
 <style>
-a {
-	color: inherit;
-}
-img.usuario {
-	width: 200px;
-	height: 200px;
-	object-fit: cover;
-	object-position: top;
-}
 </style>
-
-
-
-

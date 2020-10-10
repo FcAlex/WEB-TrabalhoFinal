@@ -89,7 +89,6 @@ public class UserService extends HttpServlet {
 		
 		// GET ALL
 		List<User> list = UserDbDAO.getAllUsers(); // recuperar todos os elementos
-		System.out.println("---------------------------");
 		
 		try {
 			JSONArray jArray = new JSONArray(); // criar uma array de json

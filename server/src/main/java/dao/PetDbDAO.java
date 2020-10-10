@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Pet;
+import model.User;
 import util.DbUtil;
 
 public class PetDbDAO {
@@ -114,6 +115,25 @@ public class PetDbDAO {
 		return new Pet(rs.getInt("id"), rs.getString("nome"), rs.getString("raca"),
 				rs.getString("porte"), rs.getString("sexo"), rs.getString("caracteristicas"),
 				rs.getString("historia"), rs.getInt("id_user"));  
+	}
+	
+	public static List<Pet> getUserByName(String name) {
+		List<Pet> pets = new ArrayList<Pet>();
+		try {
+			PreparedStatement pStmt = connection.prepareStatement("select * from pets where raca=?");
+			pStmt.setString(1, name);
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				Pet pet = returnPetResultSet(rs);
+				System.out.println(pet);
+				pets.add(pet);
+			}
+		} catch (SQLException e) {
+			System.out.println("--------------------------------------------- Deu merda");
+			e.printStackTrace();
+		}
+
+		return pets;
 	}
 
 }

@@ -1,7 +1,7 @@
 <template>
 	<header class="cabecalho container-fluid">
-		<nav class="navbar navbar-expand-sm bg-dark navbar-dark row">
-			<router-link class="navbar-brand col-sm-1 logo" to="/">
+		<nav class="navbar navbar-expand bg-dark navbar-dark row">
+			<router-link class="navbar-brand col-1 logo" to="/">
 				<img src="../assets/logo_adote.png" alt="Logo" />
 			</router-link>
 
@@ -15,7 +15,7 @@
 			</button>
 
 			<ul
-				class="navbar-nav col-sm-6 justify-content-end collapse navbar-collapse"
+				class="navbar-nav col-6 justify-content-end collapse navbar-collapse"
 				id="collapsibleNavbar"
 			>
 				<li class="nav-item">
@@ -48,17 +48,26 @@
 				</li>
 			</ul>
 
-			<form
-				class="form-inline col-sm-4 row collapse navbar-collapse"
-				action=""
-			>
-				<input
-					class="form-control mr-sm-1 col-sm-8"
-					type="text"
-					placeholder="Busque seu novo amigo"
-				/>
-				<button class="btn btn-success" type="submit">Procurar</button>
-			</form>
+			<div class="form-inline col-4 collapse navbar-collapse d-flex justify-content-start">
+				<div class="input-group">
+					<input
+						class="form-control"
+						type="text"
+						placeholder="Busque seu novo amigo"
+						v-model="pesquisa"
+					/>
+					<div class="input-group-append">
+						<router-link
+							class="input-group-text text-white bg-success buscar"
+							:to="{
+								name: 'buscarPet',
+								params: { nomePet: pesquisa },
+							}"
+							><i class="fa fa-search" aria-hidden="true"></i>
+						</router-link>
+					</div>
+				</div>
+			</div>
 
 			<div
 				class="col-sm-1 justify-content-end collapse navbar-collapse"
@@ -100,6 +109,7 @@ export default {
 	data() {
 		return {
 			logado: auth.user.logado,
+			pesquisa: "",
 		};
 	},
 	methods: {
@@ -110,7 +120,7 @@ export default {
 	},
 	beforeCreate() {
 		auth.estaLogado();
-	}
+	},
 };
 </script>
 
@@ -122,5 +132,8 @@ export default {
 	font-size: 25pt;
 	color: white;
 	cursor: pointer;
+}
+.buscar:hover {
+	text-decoration: none;
 }
 </style>
