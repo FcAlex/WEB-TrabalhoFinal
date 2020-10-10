@@ -84,9 +84,9 @@
 						></router-link>
 					</li>
 				</ul>
-				<a href="/login" class="nav-link text-white" v-else
+				<router-link to="/login" class="nav-link text-white" v-else
 					><i class="fa fa-user-circle-o" aria-hidden="true"></i
-				></a>
+				></router-link>
 			</div>
 		</nav>
 	</header>
@@ -108,9 +108,9 @@ export default {
 			location.reload();
 		},
 	},
-	created: function () {
+	beforeCreate() {
 		auth.estaLogado();
-	},
+	}
 };
 </script>
 

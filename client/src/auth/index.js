@@ -48,4 +48,6 @@ export default {
       this.user.logado = false;
     }
   },
+
+  
 }

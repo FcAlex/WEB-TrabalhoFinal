@@ -76,6 +76,7 @@ public class UserDbDAO {
 	public static List<User> getAllUsers() {
 		List<User> users = new ArrayList<User>();
 		try {
+			
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from users order by id");
 			while (rs.next()) {
