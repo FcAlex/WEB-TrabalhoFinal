@@ -17,18 +17,19 @@ public class PetDbDAO {
 
 
 	public static Pet addPet(String nome, String raca, String porte, String sexo, String caracteristicas, String historia, 
-			int id_User) {
+			int id_user) {
 		
 		try {
-			String insert = "insert into pets(nome, raca, porte, caracteristicas, historia, id_User) values (?, ?, ?, ?, ?, ?)";
+			String insert = "insert into pets(nome, raca, porte, sexo, caracteristicas, historia, id_user) values (?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
 			
 			pStmt.setString(1, nome);
 			pStmt.setString(2, raca);
 			pStmt.setString(3, porte);
-			pStmt.setString(4, caracteristicas);
-			pStmt.setString(5, historia);
-			pStmt.setInt(6, id_User);
+			pStmt.setString(4, sexo);
+			pStmt.setString(5, caracteristicas);
+			pStmt.setString(6, historia);
+			pStmt.setInt(7, id_user);
 			
 			pStmt.executeUpdate(); // alterar tabela
 			// para retornar ao user
@@ -112,7 +113,7 @@ public class PetDbDAO {
 	private static Pet returnPetResultSet(ResultSet rs) throws SQLException {
 		return new Pet(rs.getInt("id"), rs.getString("nome"), rs.getString("raca"),
 				rs.getString("porte"), rs.getString("sexo"), rs.getString("caracteristicas"),
-				rs.getString("historia"), rs.getInt("id_User"));  
+				rs.getString("historia"), rs.getInt("id_user"));  
 	}
 
 }

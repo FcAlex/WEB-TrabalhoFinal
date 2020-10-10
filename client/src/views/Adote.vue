@@ -4,7 +4,7 @@
 		<section class="container text-center p-4">
 			<h1><i class="fa fa-paw"></i> Encontre seu novo amigo</h1>
 			<hr class="mt-3 mb-4">
-			<div id="addCardsPets" class="card-deck">
+			<div id="addCardsPets" class="row">
 				<div class="col-4" v-for="pet in pets" :key="pet.id">
 					<div class="card">
 						<img
@@ -13,9 +13,12 @@
 							alt="Imagem de capa do card"
               				style="max-width: 250px"  
 						/>
-
+						
 						<div class="card-body">
-						<h5 class="card-title"> {{ pet.nome }} </h5>
+						<h5 class="card-title"> 
+							<router-link :to="{ name: 'perfilPet', params: { id: pet.id }}">{{ pet.nome }}</router-link>
+
+						</h5>
 						<ul class="list-group list-group-flush">
 								<li class="list-group-item">
 									<strong>Raça:</strong>
@@ -29,8 +32,11 @@
 									{{ pet.porte}}
 								</li>
 							</ul>
+						</div>
+
 					</div>
-					</div>
+					<br />
+					<br />
 				</div>
           	</div>
     	</section>
@@ -71,6 +77,8 @@ export default {
 </script>
 
 <style>
+a { color: inherit; } 
+
 </style>
 
 

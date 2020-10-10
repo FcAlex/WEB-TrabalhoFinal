@@ -16,7 +16,9 @@
 							<input
 								type="text"
 								class="form-control"
-								id="nomePet"
+								id="nome"
+								v-model="nome"
+								required
 							/>
 						</div>
 						<div class="form-group col">
@@ -24,13 +26,16 @@
 							<input
 								type="text"
 								class="form-control"
-								id="racaPet"
+								id="raca"
+								v-model="raca"
+								required
 							/>
 						</div>
 						<div class="form-group col">
 							<label for="porteCadastro">Porte</label>
 							<select
-								id="porteCadastro"
+								id="porte"
+								v-model="porte"
 								class="form-control"
 								required
 							>
@@ -43,7 +48,8 @@
 						<div class="form-group col">
 							<label for="SexoCadastro">Sexo</label>
 							<select
-								id="SexoCadastro"
+								id="sexo"
+								v-model="sexo"
 								class="form-control"
 								required
 							>
@@ -58,9 +64,11 @@
 						<label for="historia">Caracteristicas</label>
 						<textarea
 							class="form-control"
-							id="caracteristicasPet"
+							id="caracteristicas"
+							v-model="caracteristicas"
 							rows="4"
 							placeholder="Descreva as principais características do pet."
+							required
 						></textarea>
 					</div>
 
@@ -69,8 +77,10 @@
 						<textarea
 							class="form-control"
 							id="historia"
+							v-model="historia"
 							rows="4"
 							placeholder="Descreva a história do seu pet e os motivos que para a doar."
+							required
 						></textarea>
 					</div>
 
@@ -127,8 +137,8 @@
 
 					<div class="my-5">
 						<button
-							onclick="adicionarPets()"
-							type="submit"
+							type="button" 
+							@click="cadastrar" 
 							class="btn btn-success mx-2"
 						>
 							Cadastrar
@@ -154,6 +164,49 @@ export default {
 		Header,
 		Footer,
 	},
+	data: function(){
+		return {
+			nome: "",
+			raca: "",
+			porte: "",
+			sexo: "",
+			caracteristicas: "",
+			historia: "",
+			id_user: "",
+			baseURI: "http://localhost:8080/server/api/pets"
+		};
+	},
+	created: function(){
+	  if(localStorage.getItem("user")){
+		  this.id_user = localStorage.getItem("user");
+	  }
+	  
+  	},
+	methods: {
+		cadastrar: function () {
+			if(localStorage.getItem("user")){
+				let obj = {
+					nome: this.nome,
+					raca: this.raca,
+					porte: this.porte,
+					sexo: this.sexo,
+					caracteristicas: this.caracteristicas,
+					historia: this.historia,
+					id_user: this.id_user,
+				};
+			
+				this.$http.post(this.baseURI, obj).then((result) => {
+					if (result.data != "") {
+						alert("Cadastrado")
+					}
+				});
+			}else{
+				alert("É preciso fazer o login para continuar");
+				
+			}
+			location.reload();
+		}
+	}
 };
 </script>
 

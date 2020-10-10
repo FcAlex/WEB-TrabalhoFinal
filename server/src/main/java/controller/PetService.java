@@ -24,14 +24,14 @@ public class PetService extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// GET BY ID
 		String pathInfo = request.getPathInfo();
-		
+		System.out.println(pathInfo);
 		if(pathInfo != null) {
 			String[] params = pathInfo.split("/");
 			
 			if(params.length > 0) {
 			
 				Pet pet = PetDbDAO.getPet(Integer.parseInt(params[1])); // depos do api/user/
-								
+				System.out.println(params[1]);
 				if(pet != null) {
 					JSONObject jsonObject = new JSONObject(); // cria um objeto json
 					
@@ -42,7 +42,7 @@ public class PetService extends HttpServlet {
 					jsonObject.put("sexo", pet.getSexo());
 					jsonObject.put("caracteristicas", pet.getCaracteristicas());
 					jsonObject.put("historia", pet.getHistoria());
-					jsonObject.put("id_User", pet.getId_User());
+					jsonObject.put("id_user", pet.getId_User());
 					
 					response.setContentType("application/json"); // informando o mime
 					response.setCharacterEncoding("UTF-8"); // informando a codificacao
@@ -71,7 +71,7 @@ public class PetService extends HttpServlet {
 				jsonObject.put("sexo", pet.getSexo());
 				jsonObject.put("caracteristicas", pet.getCaracteristicas());
 				jsonObject.put("historia", pet.getHistoria());
-				jsonObject.put("id_User", pet.getId_User());
+				jsonObject.put("id_user", pet.getId_User());
 				
 				// pode usar o gson para simplificar isso: https://github.com/google/gson/blob/master/UserGuide.md
 				
@@ -105,19 +105,22 @@ public class PetService extends HttpServlet {
 		try {
 			// Request
 			jsonObject = new JSONObject(jb.toString());
+			System.out.println(jb.toString());
+			System.out.println(jsonObject.getInt("id_user"));
 			pet = PetDbDAO.addPet(jsonObject.getString("nome"), 
 					jsonObject.getString("raca"), jsonObject.getString("porte"), 
 					jsonObject.getString("sexo"), jsonObject.getString("caracteristicas"),
-					jsonObject.getString("historia"), jsonObject.getInt("id_User"));
-			
+					jsonObject.getString("historia"), jsonObject.getInt("id_user"));
+			System.out.println();
 			// Response
 			jsonObject.put("id", pet.getId());
 			jsonObject.put("nome", pet.getNome());
 			jsonObject.put("raca", pet.getRaca());
 			jsonObject.put("porte", pet.getPorte());
+			jsonObject.put("sexo", pet.getSexo());
 			jsonObject.put("caracteristicas", pet.getCaracteristicas());
 			jsonObject.put("historia", pet.getHistoria());
-			jsonObject.put("id_User", pet.getId_User());
+			jsonObject.put("id_user", pet.getId_User());
 			
 		} catch (Exception e) {
 			System.out.println("ERRO");
@@ -159,9 +162,10 @@ public class PetService extends HttpServlet {
 				jsonObject.put("nome", pet.getNome());
 				jsonObject.put("raca", pet.getRaca());
 				jsonObject.put("porte", pet.getPorte());
+				jsonObject.put("sexo", pet.getSexo());
 				jsonObject.put("caracteristicas", pet.getCaracteristicas());
 				jsonObject.put("historia", pet.getHistoria());
-				jsonObject.put("id_User", pet.getId_User());
+				jsonObject.put("id_user", pet.getId_User());
 			} catch (Exception e) {
 				// TODO: handle exception
 			}

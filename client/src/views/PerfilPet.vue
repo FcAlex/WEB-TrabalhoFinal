@@ -1,7 +1,68 @@
 <template>
   <div class="perfilPet">
     <Header></Header>
-    
+    <section class="container mx-auto my-4">
+      <div class="row">
+        <div class="col-4">
+          <!--<form class="form form-vertical" action="post">-->
+          <div class="center-block">
+            <img
+              src="https://bootdey.com/img/Content/avatar/avatar6.png"
+              class="rounded-circle img-thumbnail profile"
+              alt="profile-image"
+            />
+          </div>
+          <!--</form>-->
+        </div>
+
+        <div class="col-8">
+          <div class="profile-head">
+            <h4 class="mb-3">Um pouco sobre nome!</h4>
+            <hr />
+
+            <div class="tab-content p-3">
+              <div class="tab-pane container active" id="home">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p class>Nome/Apelido</p>
+                    <h6 class="text-muted">{{pet.nome}}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class>Raça</p>
+                    <h6 class="text-muted">  {{pet.raca}} </h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class>Porte</p>
+                    <h6 class="text-muted"> {{pet.porte}} </h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class>Sexo</p>
+                    <h6 class="text-muted"> {{pet.sexo}} </h6>
+                  </div>
+                </div>
+                <hr />
+                <div class="row text-center">
+									<div class="col-12">
+										<p class="">Características</p>
+										<h6 class="text-muted">
+											{{pet.caracteristicas}}
+										</h6>
+									</div>
+                  
+                  <div class="col-12">
+                    <hr />
+										<p class="">Minha história</p>
+										<h6 class="text-muted">
+											{{pet.historia}}
+										</h6>
+									</div>
+								</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <Footer></Footer>
   </div>
 </template>
@@ -12,31 +73,33 @@ import Footer from "@/components/Footer.vue";
 
 export default {
   name: "PerfilPet",
-	components: {
-		Header,
-		Footer,
+  props: ["id"] ,
+  components: {
+    Header,
+    Footer
   },
-  data() {
-		return {
+  data: function() {
+    return {
+      pet: {},
       pets: [],
-      baseURI: "http://localhost:8080/servidor/api/pets"
+      baseURI: "http://localhost:8080/server/api/pets"
     };
   },
   created: function() {
-			 if(localStorage.getItem("pet")) {
-        this.$router.replace("/");
-    }
+    
+    this.$http
+      .get(this.baseURI + "/" + this.id)
+      .then((result) => {
+        this.pet = result.data;
+        alert(result)
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   },
-  methods: {
-    getAll: function() {
-			  this.$http.get(this.baseURI).then((result) => {
-				this.pets = result.data;
-		  });
-	  }
-  }
+  
 };
 </script>
 
 <style>
-
 </style>

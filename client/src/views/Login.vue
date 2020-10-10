@@ -46,7 +46,7 @@
 						</div>
 
 						<div class="d-flex justify-content-end my-2">
-							<button type="submit" class="btn btn-primary">
+							<button type="button" @click="fazerLogin" class="btn btn-primary">
 								Entrar
 							</button>
 						</div>

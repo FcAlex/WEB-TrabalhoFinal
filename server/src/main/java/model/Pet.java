@@ -4,7 +4,7 @@ package model;
 public class Pet {
 	int id;
 	String nome, raca, porte, sexo, caracteristicas, historia;
-	int id_User;
+	int id_user;
 	
 	public Pet(int id, String nome, String raca, String porte, String sexo, String caracteristicas,
 			String historia, int id_user) {
@@ -16,7 +16,7 @@ public class Pet {
 		this.sexo = sexo;
 		this.caracteristicas = caracteristicas;
 		this.historia = historia;
-		this.id_User = id_user;
+		this.id_user = id_user;
 	}
 	
 	
@@ -79,18 +79,18 @@ public class Pet {
 	}
 	
 	public int getId_User() {
-		return id_User;
+		return id_user;
 	}
 
 	public void setId_User(int id_User) {
-		this.id_User = id_User;
+		this.id_user = id_User;
 	}
 	
 	@Override
 	public String toString() {
 		return "Pet [id=" + id + ", nome=" + nome + ", raca=" + raca + ", porte=" + porte + ", sexo=" + sexo
 				+ ", caracteristicas=" + caracteristicas + ", historia=" + historia
-				+ "id_user" + id_User +  "]";
+				+ "id_user" + id_user +  "]";
 	}
 
 }
