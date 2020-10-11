@@ -37,6 +37,7 @@
 											id="name"
 											placeholder="Informe seu nome"
 											required="required"
+											v-model="nome"
 										/>
 									</div>
 
@@ -59,6 +60,7 @@
 												required="required"
 												@focus="animacaoEmailFocus()"
 												@blur="animacaoEmailBlur()"
+												v-model="email"
 											/>
 										</div>
 									</div>
@@ -70,19 +72,16 @@
 											name="subject"
 											class="form-control"
 											required="required"
+											v-model="assunto"
 										>
 											<option value="na" selected="">
 												O que você deseja:
 											</option>
-											<option value="ajuda">
-												Ajuda
-											</option>
+											<option value="ajuda">Ajuda</option>
 											<option value="sugestao">
 												Sugestão
 											</option>
-											<option value="apoio">
-												Apoio
-											</option>
+											<option value="apoio">Apoio</option>
 										</select>
 									</div>
 								</div>
@@ -98,17 +97,23 @@
 											cols="25"
 											required="required"
 											placeholder="Nos envie sua mensagem, dúvida ou sugestão..."
+											v-model="mensagem"
 										></textarea>
 									</div>
 								</div>
 
 								<div class="col-12">
 									<button
-										type="submit"
+										type="button"
+										@click="salvarMensagem('arquivo.json')"
 										class="btn btn-primary pull-right"
 										id="btnContactUs"
 									>
-										<i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar Mensagem
+										<i
+											class="fa fa-paper-plane"
+											aria-hidden="true"
+										></i>
+										Enviar Mensagem
 									</button>
 								</div>
 							</div>
@@ -122,11 +127,17 @@
 							alt="Card image cap"
 						/>
 						<div class="card-body">
-							<h5 class="card-title"><i class="fa fa-comments" aria-hidden="true"></i> Envie-nos sua mensagem!</h5>
+							<h5 class="card-title">
+								<i
+									class="fa fa-comments"
+									aria-hidden="true"
+								></i>
+								Envie-nos sua mensagem!
+							</h5>
 							<p class="card-text">
-								Seu feedback é muito importante para nós!
-                A partir dele, saberemos o que podemos melhorar e continuar.
-                Seja parte dessa rede do bem!
+								Seu feedback é muito importante para nós! A
+								partir dele, saberemos o que podemos melhorar e
+								continuar. Seja parte dessa rede do bem!
 							</p>
 						</div>
 					</div>
@@ -150,17 +161,36 @@ export default {
 	},
 	data() {
 		return {
-			animacao: "fa fa-address-card"
-		}
+			animacao: "fa fa-address-card",
+			nome: "",
+			email: "",
+			assunto: "",
+			mensagem: "",
+		};
 	},
 	methods: {
 		animacaoEmailFocus() {
 			this.animacao = "fa fa-address-card-o";
 		},
-		animacaoEmailBlur()  {
+		animacaoEmailBlur() {
 			this.animacao = "fa fa-address-card";
-		}
-	}
+		},
+		salvarMensagem(name) {
+			let dados = {
+				nome: this.nome,
+				email: this.email,
+				assunto: this.assunto,
+				mensagem: this.mensagem,
+			};
+			let texto = "Nome: " + this.nome + "\nEmail: " + this.email + "\nAssunto: " + this.assunto + "\nMensagem: " + this.mensagem; 
+			var link = document.createElement("a");
+			link.href =
+				"data:application/octet-stream;charset=utf-8," +
+				texto;
+			link.download = "arquivo.txt";
+			link.click();
+		},
+	},
 };
 </script>
 

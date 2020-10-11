@@ -142,7 +142,6 @@ public class PetService extends HttpServlet {
 					jsonObject.getString("porte"), jsonObject.getString("sexo"),
 					jsonObject.getString("caracteristicas"), jsonObject.getString("historia"),
 					jsonObject.getInt("id_user"));
-			System.out.println();
 			// Response
 			jsonObject.put("id", pet.getId());
 			jsonObject.put("nome", pet.getNome());

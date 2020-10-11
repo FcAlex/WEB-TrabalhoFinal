@@ -83,8 +83,8 @@
 						required
 					></textarea>
 				</div>
-
-				<div class="d-flex justify-content-between">
+				<div class="container"></div>
+				<div class="d-flex justify-content-start">
 					<div class="input-group mr-auto p-2 bd-highlight">
 						<div class="form-group">
 							<input
@@ -96,37 +96,11 @@
 						</div>
 					</div>
 
-					<div class="p-2 bd-highlight">
-						<div class="card" style="width: 18rem">
-							<img
-								v-if="pet.id"
-								card-img-top
-								:src="'uploads/pet/' + pet.id"
-							/>
-							<div class="card-footer">
-								<p class="card-text">
-									Esta será a primeira imagem que aparecerá ao
-									realizar a busca.
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="input-group p-2 bd-highlight">
-						<div class="custom-file">
-							<input
-								type="file"
-								class="custom-file-input"
-								id="inputGroupFile04"
-								aria-describedby="inputGroupFileAddon04"
-								multiple
-							/>
-							<label
-								class="custom-file-label"
-								for="inputGroupFile04"
-								>Carregar mais imagens</label
-							>
-						</div>
+					<div class="alert alert-info" role="alert">
+						<p>
+							Esta será a imagem que aparecerá ao
+							realizar a busca.
+						</p>
 					</div>
 				</div>
 
@@ -182,10 +156,9 @@ export default {
 			this.file = event.target.files[0];
 		},
 		cadastrar: function () {
-			
 			this.validarCampos();
-			if(this.campos){
-					if (localStorage.getItem("user") ) {
+			if (this.campos) {
+				if (localStorage.getItem("user")) {
 					let obj = {
 						nome: this.nome,
 						raca: this.raca,
@@ -207,12 +180,11 @@ export default {
 					alert("É preciso fazer o login para continuar");
 				}
 				this.$router.replace("/adote");
-			}else{
-				alert("Preencha todos os campos")
+			} else {
+				alert("Preencha todos os campos");
 			}
 		},
 		handleFileUpload2(id) {
-
 			let obj = {
 				resource: "pet",
 				id: id,
@@ -233,28 +205,29 @@ export default {
 					console.log(result);
 				});
 		},
-		
-		validarCampos: function () { //Usando getElementById para não acumalar data
-		//Função que garante somente que os campos não estejam vazios
-			var nome = document.getElementById('nome');
-			var raca = document.getElementById('raca');
-			var porte = document.getElementById('porte');
-			var sexo = document.getElementById('sexo');
-			var caracteristicas = document.getElementById('caracteristicas');
-			var historia = document.getElementById('historia');
 
-			var array = [nome,raca,porte,sexo,caracteristicas,historia];
+		validarCampos: function () {
+			//Usando getElementById para não acumalar data
+			//Função que garante somente que os campos não estejam vazios
+			var nome = document.getElementById("nome");
+			var raca = document.getElementById("raca");
+			var porte = document.getElementById("porte");
+			var sexo = document.getElementById("sexo");
+			var caracteristicas = document.getElementById("caracteristicas");
+			var historia = document.getElementById("historia");
+
+			var array = [nome, raca, porte, sexo, caracteristicas, historia];
 
 			this.campos = true;
 			var i = 0;
-			for(i=0;i<6;i++){
-				if(array[i].value.length == 0){
+			for (i = 0; i < 6; i++) {
+				if (array[i].value.length == 0) {
 					this.campos = false;
-					console.log(array[i])
+					console.log(array[i]);
 					break;
 				}
 			}
-		}
+		},
 	},
 	computed: {
 		image() {

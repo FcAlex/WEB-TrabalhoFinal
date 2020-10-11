@@ -9,8 +9,9 @@
 					<div class="card mb-2">
 						<img
 							class="card-img-top rounded mx-auto d-block rounded mt-2 usuario"
-							src="../assets/dog_example_1.jpg"
+							:src="'uploads/pet/' + + pet.id"
 							alt="Imagem de capa do card"
+							onerror="this.src='static/pet.png'"
 						/>
 
 						<div class="card-body">
@@ -73,7 +74,7 @@ export default {
 			.catch(function (error) {
 				console.log(error);
 			});
-	},
+	}
 };
 </script>
 

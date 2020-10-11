@@ -76,6 +76,14 @@ const routes = [
     props: true
   },
   {
+    path: '/editarUser',
+    name: 'editarUser',
+    component: function () {
+      return import('../views/Editar.vue')
+    },
+    props: true
+  },
+  {
     path: "*",
     redirect: "/"
   }

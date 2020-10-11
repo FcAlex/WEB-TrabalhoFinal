@@ -9,8 +9,7 @@
 							:src="'uploads/user/' + data.id"
 							class="rounded-circle img-thumbnail profile"
 							alt="Imagem do Usuário"
-							ref="imagePadrao"
-							@error="imagemPadrao()"
+							onerror="this.src='static/pet.png'"
 						/>
 						<div class="d-flex justify-content-center">
 							<label
@@ -104,7 +103,7 @@
 								class="tab-pane container fade"
 								id="configuracao"
 							>
-								<button type="button" class="btn btn-info mx-2">
+								<button type="button" class="btn btn-info mx-2" @click="$router.replace('/editarUser')">
 									<i
 										class="fa fa-info-circle"
 										aria-hidden="true"
@@ -256,10 +255,7 @@ export default {
 				.catch((e) => {
 					console.log(e);
 				});
-		},
-		imagemPadrao() {
-			this.$refs.imagemPadrao.src = "static/pessoa.png";
-		},
+		}
 	},
 	created: function () {
 		var user = JSON.parse(localStorage.getItem("user"));
