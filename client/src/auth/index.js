@@ -9,7 +9,6 @@ export default {
 
   login(contexto, obj) {
     contexto.$http.post(LOGIN, obj).then((result) => {
-      alert(result.data)
         if(result.data != '') {
           localStorage.setItem("user", result.data.id);
           this.user.logado = true;
