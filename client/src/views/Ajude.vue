@@ -95,45 +95,12 @@
 							/>
 						</div>
 					</div>
-
-<<<<<<< HEAD
+					
 					<div class="alert alert-info" role="alert">
 						<p>
 							Esta será a imagem que aparecerá ao
 							realizar a busca.
 						</p>
-=======
-					<div class="p-2 bd-highlight">
-						<div class="card" style="width: 18rem">
-							<img
-								v-if="pet.id"
-								:src="'uploads/pet/' + pet.id"
-							/>
-							<div class="card-footer">
-								<p class="card-text">
-									Esta será a primeira imagem que aparecerá ao
-									realizar a busca.
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="input-group p-2 bd-highlight">
-						<div class="custom-file">
-							<input
-								type="file"
-								class="custom-file-input"
-								id="inputGroupFile04"
-								aria-describedby="inputGroupFileAddon04"
-								multiple
-							/>
-							<label
-								class="custom-file-label"
-								for="inputGroupFile04"
-								>Carregar mais imagens</label
-							>
-						</div>
->>>>>>> 74646435df9cda0061034553c0162a5b88a8e561
 					</div>
 				</div>
 
