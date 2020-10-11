@@ -169,6 +169,7 @@ export default {
 			baseUploadURI: "http://localhost:8080/server/upload",
 			file: null,
 			pet: {},
+			campos: false,
 		};
 	},
 	created: function () {
@@ -181,28 +182,34 @@ export default {
 			this.file = event.target.files[0];
 		},
 		cadastrar: function () {
-			if (localStorage.getItem("user")) {
-				let obj = {
-					nome: this.nome,
-					raca: this.raca,
-					porte: this.porte,
-					sexo: this.sexo,
-					caracteristicas: this.caracteristicas,
-					historia: this.historia,
-					id_user: this.id_user,
-				};
+			
+			this.validarCampos();
+			if(this.campos){
+					if (localStorage.getItem("user") ) {
+					let obj = {
+						nome: this.nome,
+						raca: this.raca,
+						porte: this.porte,
+						sexo: this.sexo,
+						caracteristicas: this.caracteristicas,
+						historia: this.historia,
+						id_user: this.id_user,
+					};
 
-				this.$http.post(this.baseURI, obj).then((result) => {
-					if (result.data != "") {
-						//alert("Cadastrado");
-						this.pet = result.data;
-						this.handleFileUpload2(this.pet.id);
-					}
-				});
-			} else {
-				alert("É preciso fazer o login para continuar");
+					this.$http.post(this.baseURI, obj).then((result) => {
+						if (result.data != "") {
+							alert("Cadastrado");
+							this.pet = result.data;
+							this.handleFileUpload2(this.pet.id);
+						}
+					});
+				} else {
+					alert("É preciso fazer o login para continuar");
+				}
+				this.$router.replace("/adote");
+			}else{
+				alert("Preencha todos os campos")
 			}
-			this.$router.replace("/adote");
 		},
 		handleFileUpload2(id) {
 
@@ -226,6 +233,28 @@ export default {
 					console.log(result);
 				});
 		},
+		
+		validarCampos: function () { //Usando getElementById para não acumalar data
+		//Função que garante somente que os campos não estejam vazios
+			var nome = document.getElementById('nome');
+			var raca = document.getElementById('raca');
+			var porte = document.getElementById('porte');
+			var sexo = document.getElementById('sexo');
+			var caracteristicas = document.getElementById('caracteristicas');
+			var historia = document.getElementById('historia');
+
+			var array = [nome,raca,porte,sexo,caracteristicas,historia];
+
+			this.campos = true;
+			var i = 0;
+			for(i=0;i<6;i++){
+				if(array[i].value.length == 0){
+					this.campos = false;
+					console.log(array[i])
+					break;
+				}
+			}
+		}
 	},
 	computed: {
 		image() {

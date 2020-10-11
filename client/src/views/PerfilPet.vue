@@ -7,9 +7,10 @@
 					<!--<form class="form form-vertical" action="post">-->
 					<div class="center-block">
 						<img
-							src="https://bootdey.com/img/Content/avatar/avatar6.png"
+							:src="'uploads/pet/' + pet.id"
 							class="rounded img-thumbnail profile pet"
 							alt="profile-image"
+							onerror="this.src='static/pet.png'"
 						/>
 					</div>
 					<!--</form>-->
@@ -17,16 +18,16 @@
 
 				<div class="col-8">
 					<div class="profile-head">
-						<h4 class="mb-3">Um pouco sobre nome!</h4>
+						<h4 class="mb-3">Um pouco sobre {{pet.nome}}!</h4>
 						<hr />
 
 						<div class="tab-content p-3">
 							<div class="tab-pane container active" id="home">
 								<div class="row">
 									<div class="col-sm-6">
-										<p class>Nome/Apelido</p>
+										<p class>Atual dono</p>
 										<h6 class="text-muted">
-											{{ pet.nome }}
+											{{user.firstName}} {{user.lastName}}
 										</h6>
 									</div>
 									<div class="col-sm-6">
@@ -67,7 +68,7 @@
 								</div>
 							</div>
 						</div>
-            <h1> Dono: {{user.firstName}} {{user.lastName}}</h1>
+            
 					</div>
 				</div>
 			</div>
