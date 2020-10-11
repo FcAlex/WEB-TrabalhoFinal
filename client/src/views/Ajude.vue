@@ -100,7 +100,6 @@
 						<div class="card" style="width: 18rem">
 							<img
 								v-if="pet.id"
-								card-img-top
 								:src="'uploads/pet/' + pet.id"
 							/>
 							<div class="card-footer">
