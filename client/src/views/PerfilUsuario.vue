@@ -69,6 +69,20 @@
 									Opções</a
 								>
 							</li>
+
+							<li class="nav-item">
+								<a
+									class="nav-link text-secondary"
+									data-toggle="tab"
+									href="#pets"
+									role="tab"
+									aria-controls="profile"
+									aria-selected="false"
+								>
+									<i class="fa fa-paw" aria-hidden="true"></i>
+									Adoção</a
+								>
+							</li>
 						</ul>
 
 						<div class="tab-content p-3">
@@ -185,6 +199,12 @@
 										</div>
 									</div>
 								</div>
+							</div>
+							<div
+								class="tab-pane container fade"
+								id="pets"
+							>
+								
 							</div>
 						</div>
 					</div>
