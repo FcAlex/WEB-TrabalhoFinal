@@ -95,8 +95,8 @@ export default {
 		return {
 			pet: {},
 			user: {},
-			baseURI: "http://localhost:8080/server/api/pets",
-			baseUserURI: "http://localhost:8080/server/api/users",
+			baseURI: "http://localhost:8080/api/pets",
+			baseUserURI: "http://localhost:8080/api/users",
 		};
 	},
 	created: function () {

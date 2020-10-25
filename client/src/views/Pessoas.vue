@@ -28,7 +28,8 @@
 								</li>
 								<li class="list-group-item">
 									<strong>Endereço:</strong>
-									{{ user.endereco }}
+									{{ user.logradouro }}, nr. {{user.numero}}, {{user.bairro}}, 
+									{{user.cidade}}-{{user.estado}}, CEP {{user.cep}}
 								</li>
 							</ul>
 						</div>
@@ -56,7 +57,7 @@ export default {
 	data() {
 		return {
 			users: [], //todo
-			baseURI: "http://localhost:8080/server/api/users",
+			baseURI: "http://localhost:8080/api/users",
 		};
 	},
 	created: function () {

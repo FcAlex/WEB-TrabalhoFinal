@@ -21,7 +21,7 @@
 									class="form-control"
 									id="emailLogin"
 									placeholder="exemplo@algo.com"
-                  v-model="email"
+									v-model="email"
 									required
 								/>
 							</div>
@@ -39,14 +39,18 @@
 									class="form-control"
 									id="senhaLogin"
 									placeholder="Insira sua senha"
-                  v-model="senha"
+									v-model="senha"
 									required
 								/>
 							</div>
 						</div>
 
 						<div class="d-flex justify-content-end my-2">
-							<button type="button" @click="fazerLogin" class="btn btn-primary">
+							<button
+								type="button"
+								@click="fazerLogin"
+								class="btn btn-primary"
+							>
 								Entrar
 							</button>
 						</div>
@@ -55,12 +59,16 @@
 							<p>
 								Não tem uma conta?
 								<span>
-									<router-link to="/cadastro"
+									<router-link
+										to="/cadastro"
+										class="alert-link"
 										>Crie uma!</router-link
 									>
 								</span>
 								<br />
-								<a href="#"> Esqueci minha Senha</a>
+								<a href="#" class="alert-link">
+									Esqueci minha Senha</a
+								>
 							</p>
 						</div>
 					</div>
@@ -85,25 +93,25 @@ export default {
 	data() {
 		return {
 			email: "",
-      senha: "",
-      data: Object,
-			baseURI: "http://localhost:8080/server/api/users",
+			senha: "",
+			data: Object,
+			baseURI: "http://localhost:8080/api/users",
 		};
 	},
-	created: function() {
-    if(localStorage.getItem("user")) {
-        this.$router.replace("/");
-    }
-  },
+	created: function () {
+		if (this.$session.exists()) {
+			this.$router.replace("/");
+		}
+	},
 	methods: {
 		fazerLogin: function () {
-			let obj = {
-				email: this.email,
-				senha: this.senha,
-			};
-			auth.login(this, obj);
+			let formData = new FormData();
+			formData.append("email", this.email.trim());
+			formData.append("senha", this.senha.trim());
+
+			auth.login(this, formData);
 		},
-	}
+	},
 };
 </script>
 

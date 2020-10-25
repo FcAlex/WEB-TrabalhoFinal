@@ -114,12 +114,12 @@ export default {
 	},
 	methods: {
 		sair() {
-			auth.sair();
+			auth.sair(this);
 			location.reload();
 		},
 	},
 	beforeCreate() {
-		auth.estaLogado();
+		auth.estaLogado(this);
 	},
 };
 </script>

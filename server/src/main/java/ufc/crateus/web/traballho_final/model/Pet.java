@@ -1,5 +1,6 @@
 package ufc.crateus.web.traballho_final.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,7 +11,14 @@ public class Pet {
 	@Id
 	@GeneratedValue
 	int id;
-	String nome, raca, porte, sexo, caracteristicas, historia;
+	String nome;
+	String raca;
+	String porte;
+	String sexo;
+	@Column(columnDefinition = "TEXT")
+	String caracteristicas;
+	@Column(columnDefinition = "TEXT")
+	String historia;
 	int id_user;
 	
 	public Pet() {

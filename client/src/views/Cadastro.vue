@@ -2,8 +2,8 @@
 	<div class="cadastro">
 		<Header></Header>
 
-		<section class="container p-4 principal">
-			<form class="d-flex justify-content-center" @submit="cadastrar">
+		<section class="container-fluid p-4 principal">
+			<form class="d-block mx-auto col-6" @submit="cadastrar">
 				<div id="divAdd" class="card p-4">
 					<h1 class="text-center">
 						<i class="fa fa-user-plus" aria-hidden="true"></i>
@@ -30,6 +30,8 @@
 								placeholder="Insira seu primeiro nome"
 								v-model="firstName"
 								required
+								ref="primeiroNome"
+								@blur="isValid('primeiroNome', 'form-control')"
 							/>
 						</div>
 					</div>
@@ -48,6 +50,8 @@
 								placeholder="Insira seu segundo nome"
 								v-model="lastName"
 								required
+								ref="segundoNome"
+								@blur="isValid('segundoNome', 'form-control')"
 							/>
 						</div>
 					</div>
@@ -97,8 +101,10 @@
 									'text-danger': !senhaValida,
 									'text-muted': senhaValida,
 								}"
-								>Sua senha deve ter mais de 8 caracteres
-								incluindo letras e números</small
+								>Senha deverá conter no mínimo uma letra
+								minúscula, uma maiúscula, um número, um
+								caractere especial e com o comprimento mínimo de
+								oito caracteres.</small
 							>
 						</div>
 					</div>
@@ -114,24 +120,60 @@
 								type="tel"
 								class="form-control"
 								id="telefoneCadastro"
-								placeholder="Insira seu telefone"
+								placeholder="(00)00000-0000 ou (00)0000-0000"
 								v-model="telefone"
+								@blur="validarTelefone"
+								:class="{
+									'is-invalid': telefoneValido === false,
+								}"
 							/>
 						</div>
 					</div>
 
 					<hr />
 
-					<div class="form-group">
-						<label for="inputAddress">Endereço: *</label>
-						<input
-							type="text"
-							class="form-control"
-							id="enderecoCadastro"
-							placeholder="Rua dos Bobos, nº 0"
-							required
-							v-model="endereco"
-						/>
+					<div class="form-row">
+						<div class="form-group col-5">
+							<label for="inputAddress">Logradouro: *</label>
+							<input
+								type="text"
+								class="form-control"
+								id="logradouroCadastro"
+								placeholder="Rua dos Bobos"
+								required
+								v-model="logradouro"
+								ref="logradouro"
+								@blur="isValid('logradouro', 'form-control')"
+							/>
+						</div>
+
+						<div class="form-group col-2">
+							<label for="inputAddress">Número: *</label>
+							<input
+								type="number"
+								class="form-control"
+								id="numeroCadastro"
+								placeholder="0"
+								required
+								v-model="numero"
+								ref="numero"
+								@blur="isValid('numero', 'form-control')"
+							/>
+						</div>
+
+						<div class="form-group col-5">
+							<label for="inputAddress">Bairro: *</label>
+							<input
+								type="text"
+								class="form-control"
+								id="bairroCadastro"
+								placeholder="Tal"
+								required
+								v-model="bairro"
+								ref="bairro"
+								@blur="isValid('bairro', 'form-control')"
+							/>
+						</div>
 					</div>
 
 					<div class="form-group">
@@ -150,10 +192,12 @@
 							<label for="inputCity">Cidade: *</label>
 							<input
 								type="text"
-								class="form-control border border-success"
+								class="form-control"
 								id="cidadeCadastro"
 								required
 								v-model="cidade"
+								ref="cidade"
+								@blur="isValid('cidade', 'form-control')"
 							/>
 						</div>
 						<div class="col-md-3 mb-3">
@@ -163,8 +207,15 @@
 								class="form-control"
 								required
 								v-model="estado"
+								ref="estado"
+								@blur="
+									isValid('estado', 'form-control') &&
+										opcaoErrada('estado', 'form-control')
+								"
 							>
-								<option selected>Escolher...</option>
+								<option value="ERROR" selected>
+									Escolher...
+								</option>
 								<option value="CE">Ceará</option>
 								<option value="PI">Piauí</option>
 							</select>
@@ -176,10 +227,12 @@
 								class="form-control"
 								id="cepCadastro"
 								required
-								maxlength="9"
-								minlength="9"
+								maxlength="10"
+								minlength="10"
 								v-model="cep"
-								placeholder="00000-000"
+								placeholder="00.000-000"
+								@blur="validarCep"
+								:class="{ 'is-invalid': cepValido === false }"
 							/>
 						</div>
 					</div>
@@ -215,39 +268,45 @@ export default {
 			email: "",
 			senha: "",
 			telefone: "",
-			endereco: "",
+			logradouro: "",
+			numero: "",
+			bairro: "",
 			complemento: "",
 			cidade: "",
 			estado: "",
 			cep: "",
 			senhaValida: true,
 			emailValido: true,
+			cepValido: true,
+			telefoneValido: true,
 		};
 	},
 	created: function () {
-		if (localStorage.getItem("user")) {
-			this.$router.replace("/");
+		if (this.$session.exists()) {
+			this.$router.push("/");
 		}
 	},
 	methods: {
 		cadastrar: function () {
 			let obj = {
-				firstName: this.firstName,
-				lastName: this.lastName,
-				email: this.email,
-				senha: this.senha,
-				telefone: this.telefone,
-				endereco: this.endereco,
-				complemento: this.complemento,
-				cidade: this.cidade,
-				estado: this.estado,
-				cep: this.cep,
+				firstName: this.firstName.trim(),
+				lastName: this.lastName.trim(),
+				email: this.email.trim(),
+				senha: this.senha.trim(),
+				telefone: this.telefone.trim(),
+				logradouro: this.logradouro.trim(),
+				numero: this.numero.trim(),
+				bairro: this.bairro.trim(),
+				complemento: this.complemento.trim(),
+				cidade: this.cidade.trim(),
+				estado: this.estado.trim(),
+				cep: this.cep.trim(),
 			};
 
 			auth.criarConta(this, obj);
 		},
 		validarSenha: function () {
-			var regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+			var regex = /(?=^.{8,}$)((?=.*\d)(?=.*\W+))(?![.\n]).*$/;
 			if (regex.test(this.senha)) {
 				this.senhaValida = true;
 			} else {
@@ -261,6 +320,35 @@ export default {
 			} else {
 				this.emailValido = false;
 			}
+		},
+		validarCep: function () {
+			var regex = /^[0-9]{2}.[0-9]{3}-[0-9]{3}$/;
+			if (regex.test(this.cep)) {
+				this.cepValido = true;
+			} else {
+				this.cepValido = false;
+			}
+		},
+		validarTelefone: function () {
+			var regex = /^\(?\d{2}\)?[\s-]?[\s9]?\d{4}-?\d{4}$/;
+			if (regex.test(this.telefone)) {
+				this.telefoneValido = true;
+			} else {
+				this.telefoneValido = false;
+			}
+		},
+		isValid: function (input, padrao) {
+			var elem = this.$refs[input];
+			if (elem.value == "") {
+				elem.classList += " is-invalid";
+			} else {
+				elem.classList = padrao;
+			}
+		},
+		opcaoErrada: function (input, padrao) {
+			var elem = this.$refs[input];
+			if (elem.value == "ERROR") elem.classList += " is-invalid";
+			else elem.classList = padrao;
 		},
 	},
 };

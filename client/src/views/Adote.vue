@@ -60,7 +60,7 @@ export default {
 	data() {
 		return {
 			pets: [],
-			baseURI: "http://localhost:8080/server/api/pets",
+			baseURI: "http://localhost:8080/api/pets",
 		};
 	},
 	created: function () {

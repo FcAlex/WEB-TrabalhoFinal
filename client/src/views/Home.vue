@@ -24,13 +24,13 @@ export default {
   data() {
     return {
       data: '',
-      baseURI: "http://localhost:8080/server/api/users",
+      baseURI: "http://localhost:8080/api/users",
     };
   },
   created: function() {
-    var user = JSON.parse(localStorage.getItem("user"));
-    if(user) {
-      this.$http.get(this.baseURI + "/" + user).then((result) => {
+    if(this.$session.exists()) {
+      var user = JSON.parse(this.$session.get("user"));
+      this.$http.get(this.baseURI + "/" + user.id).then((result) => {
         this.data = result.data;
       });
     }    

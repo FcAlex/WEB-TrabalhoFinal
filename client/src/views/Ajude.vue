@@ -90,8 +90,7 @@
 							<input
 								type="file"
 								id="file"
-								ref="file"
-								@change="handleFileUpload($event)"
+								@change="imagePath($event)"
 							/>
 						</div>
 					</div>
@@ -139,60 +138,32 @@ export default {
 			caracteristicas: "",
 			historia: "",
 			id_user: "",
-			baseURI: "http://localhost:8080/server/api/pets",
-			baseUploadURI: "http://localhost:8080/server/upload",
+			baseURI: "http://localhost:8080/api/pets",
+			baseUploadURI: "http://localhost:8080/api/upload",
 			file: null,
 			pet: {},
 			campos: false,
 		};
 	},
 	created: function () {
-		if (localStorage.getItem("user")) {
-			this.id_user = localStorage.getItem("user");
+		if (this.$session.exists()) {
+			var user = this.$session.get("user");
+			this.id_user = JSON.parse(user).id;
 		}
 	},
 	methods: {
-		handleFileUpload(event) {
+		imagePath(event) {
 			this.file = event.target.files[0];
 		},
-		cadastrar: function () {
-			this.validarCampos();
-			if (this.campos) {
-				if (localStorage.getItem("user")) {
-					let obj = {
-						nome: this.nome,
-						raca: this.raca,
-						porte: this.porte,
-						sexo: this.sexo,
-						caracteristicas: this.caracteristicas,
-						historia: this.historia,
-						id_user: this.id_user,
-					};
-
-					this.$http.post(this.baseURI, obj).then((result) => {
-						if (result.data != "") {
-							alert("Cadastrado");
-							this.pet = result.data;
-							this.handleFileUpload2(this.pet.id);
-						}
-					});
-				} else {
-					alert("É preciso fazer o login para continuar");
-				}
-				this.$router.replace("/adote");
-			} else {
-				alert("Preencha todos os campos");
+		handleFileUpload(id) {
+			
+			if(this.file == null) {
+				alert("ERROR")
+				return;
 			}
-		},
-		handleFileUpload2(id) {
-			let obj = {
-				resource: "pet",
-				id: id,
-			};
-			let json = JSON.stringify(obj);
-
 			let form = new FormData();
-			form.append("obj", json);
+			form.append("resource", "pet");
+			form.append("id", id);
 			form.append("file", this.file);
 
 			this.$http
@@ -205,7 +176,35 @@ export default {
 					console.log(result);
 				});
 		},
+		cadastrar: function () {
+			this.validarCampos();
+			if (this.campos) {
+				if (this.$session.exists()) {
+					let obj = {
+						nome: this.nome,
+						raca: this.raca,
+						porte: this.porte,
+						sexo: this.sexo,
+						caracteristicas: this.caracteristicas,
+						historia: this.historia,
+						id_user: this.id_user,
+					};
 
+					this.$http.post(this.baseURI, obj).then((result) => {
+						if (result.status === 200) {
+							alert("Cadastrado");
+							this.pet = result.data;
+							this.handleFileUpload(this.pet.id);
+						}
+					});
+				} else {
+					alert("É preciso fazer o login para continuar");
+				}
+				this.$router.replace("/adote");
+			} else {
+				alert("Preencha todos os campos");
+			}
+		},
 		validarCampos: function () {
 			//Usando getElementById para não acumalar data
 			//Função que garante somente que os campos não estejam vazios

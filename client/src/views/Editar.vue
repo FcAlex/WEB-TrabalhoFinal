@@ -31,7 +31,7 @@
 								v-model="firstName"
 								required
 								ref="primeiroNome"
-								@blur="isValid('primeiroNome','form-control')"
+								@blur="isValid('primeiroNome', 'form-control')"
 							/>
 						</div>
 					</div>
@@ -71,7 +71,7 @@
 								required
 								v-model="email"
 								@blur="validarEmail"
-                ref="email"
+								ref="email"
 								:class="{ 'is-invalid': emailValido === false }"
 							/>
 						</div>
@@ -121,26 +121,56 @@
 								placeholder="Insira seu telefone"
 								v-model="telefone"
 								required
-								ref="telefone"
-								@blur="isValid('telefone', 'form-control')"
+								@blur="validarTelefone"
+								:class="{ 'is-invalid': telefoneValido === false }"
 							/>
 						</div>
 					</div>
 
 					<hr />
 
-					<div class="form-group">
-						<label for="inputAddress">Endereço: *</label>
-						<input
-							type="text"
-							class="form-control"
-							id="enderecoCadastro"
-							placeholder="Rua dos Bobos, nº 0"
-							required
-							v-model="endereco"
-							ref="endereco"
-							@blur="isValid('endereco','form-control')"
-						/>
+					<div class="form-row">
+						<div class="form-group col-5">
+							<label for="inputAddress">Logradouro: *</label>
+							<input
+								type="text"
+								class="form-control"
+								id="logradouroCadastro"
+								placeholder="Rua dos Bobos"
+								required
+								v-model="logradouro"
+								ref="logradouro"
+								@blur="isValid('logradouro', 'form-control')"
+							/>
+						</div>
+
+						<div class="form-group col-2">
+							<label for="inputAddress">Número: *</label>
+							<input
+								type="number"
+								class="form-control"
+								id="numeroCadastro"
+								placeholder="0"
+								required
+								v-model="numero"
+								ref="numero"
+								@blur="isValid('numero', 'form-control')"
+							/>
+						</div>
+
+						<div class="form-group col-5">
+							<label for="inputAddress">Bairro: *</label>
+							<input
+								type="text"
+								class="form-control"
+								id="bairroCadastro"
+								placeholder="Tal"
+								required
+								v-model="bairro"
+								ref="bairro"
+								@blur="isValid('bairro', 'form-control')"
+							/>
+						</div>
 					</div>
 
 					<div class="form-group">
@@ -151,6 +181,8 @@
 							id="complementoCadastro"
 							placeholder="Apartamento, casa, etc"
 							v-model="complemento"
+							ref="complemento"
+							@blur="isValid('complemento', 'form-control')"
 						/>
 					</div>
 
@@ -164,7 +196,7 @@
 								required
 								v-model="cidade"
 								ref="cidade"
-								@blur="isValid('cidade','form-control')"
+								@blur="isValid('cidade', 'form-control')"
 							/>
 						</div>
 						<div class="col-md-3 mb-3">
@@ -175,7 +207,7 @@
 								required
 								v-model="estado"
 								ref="estado"
-								@blur="isValid('estado','form-control')"
+								@blur="isValid('estado', 'form-control')"
 							>
 								<option value="CE">Ceará</option>
 								<option value="PI">Piauí</option>
@@ -233,23 +265,24 @@ export default {
 			email: "",
 			senha: "",
 			telefone: "",
-			endereco: "",
+			logradouro: "",
+			numero: "",
+			bairro: "",
 			complemento: "",
 			cidade: "",
 			estado: "",
 			cep: "",
 			senhaValida: true,
-      emailValido: true,
-      cepValido: true,
-      data: '',
-      baseURI: "http://localhost:8080/server/api/users",
+			emailValido: true,
+			cepValido: true,
+			data: "",
+			baseURI: "http://localhost:8080/adoteumamigo/users",
 		};
 	},
 	created: function () {
-		var user = JSON.parse(localStorage.getItem("user"));
-		if (user != null) {
-			this.$http.get(this.baseURI + "/" + user).then((result) => {
-        this.data = result.data;
+		if (this.$session.exists()) {
+			this.$http.get(this.baseURI + "/" + this.$session.id()).then((result) => {
+				this.data = result.data;
 			});
 		} else {
 			this.$router.replace("/");
@@ -257,23 +290,27 @@ export default {
 	},
 	methods: {
 		atualizar: function () {
-      let obj = {
+			let obj = {
 				firstName: this.firstName,
 				lastName: this.lastName,
 				email: this.email,
 				senha: this.senha,
 				telefone: this.telefone,
-				endereco: this.endereco,
+				logradouro: this.logradouro,
+				numero: this.numero,
+				bairro: this.bairro,
 				complemento: this.complemento,
 				cidade: this.cidade,
 				estado: this.estado,
 				cep: this.cep,
 			};
-      this.$http.put(this.baseURI + "/" + this.data.id, obj).then((result) => {
-        this.user = result.data;
-        alert("Atualizado com sucesso!");
-        location.reload();
-      });
+			this.$http
+				.put(this.baseURI + "/" + this.data.id, obj)
+				.then((result) => {
+					this.user = result.data;
+					alert("Atualizado com sucesso!");
+					location.reload();
+				});
 		},
 		validarSenha: function () {
 			var regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -301,12 +338,20 @@ export default {
 		},
 		isValid: function (input, padrao) {
 			var elem = this.$refs[input];
-			if(elem.value == "") {
+			if (elem.value == "") {
 				elem.classList += " is-invalid";
 			} else {
 				elem.classList = padrao;
 			}
-    }
+		},
+		validarTelefone: function () {
+			var regex = /^(\(\d{2}\))(\d{4,5}\-\d{4})$/;
+			if (regex.test(this.telefone)) {
+				this.telefoneValido = true;
+			} else {
+				this.telefoneValido = false;
+			}
+		},
 	},
 };
 </script>

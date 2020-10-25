@@ -106,9 +106,9 @@
 									<div class="col-12">
 										<p class="">Endereço</p>
 										<h6 class="text-muted">
-											{{ data.endereco }},
+											{{ data.logradouro }}, nr. {{data.numero}}, {{data.bairro}},
 											{{ data.complemento }},
-											{{ data.cidade }}-{{ data.estado }}
+											{{ data.cidade }}-{{ data.estado }}, {{data.cep}}
 										</h6>
 									</div>
 								</div>
@@ -229,34 +229,27 @@ export default {
 	},
 	data() {
 		return {
-			file: null,
+			file: "",
 			data: "",
-			baseURI: "http://localhost:8080/server/api/users",
-			baseUploadURI: "http://localhost:8080/server/upload",
+			baseURI: "http://localhost:8080/api/users",
+			baseUploadURI: "http://localhost:8080/api/upload",
 		};
 	},
 	methods: {
 		selecionarImagem() {
-			this.$http.put(this.baseURI, this.data).then((result) => {
-				console.log(result);
-				this.handleFileUpload(this.data.id);
-			});
+			this.handleFileUpload(this.data.id);
+			location.reload();
 		},
 		handleFileUpload(id) {
 			this.file = this.$refs.image.files[0];
-
-			let obj = {
-				resource: "user",
-				id: id,
-			};
-			let json = JSON.stringify(obj);
-
+		
 			let form = new FormData();
-			form.append("obj", json);
+			form.append("resource", "user");
+			form.append("id", id);
 			form.append("file", this.file);
 
 			this.$http
-				.post(this.baseUploadURI, form, {
+				.put(this.baseUploadURI, form, {
 					headers: {
 						"Content-Type": "multipart/form-data",
 					},
@@ -278,11 +271,12 @@ export default {
 		}
 	},
 	created: function () {
-		var user = JSON.parse(localStorage.getItem("user"));
-		if (user != null) {
-			this.$http.get(this.baseURI + "/" + user).then((result) => {
-				this.data = result.data;
-			});
+		if (this.$session.exists()) {
+			var user = JSON.parse(this.$session.get("user"));
+			this.data = user;
+			//this.$http.get(this.baseURI + "/" + user.id).then((result) => {
+				//this.data = result.data;
+			//});
 		} else {
 			this.$router.replace("/");
 		}
