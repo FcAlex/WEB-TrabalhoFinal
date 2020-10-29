@@ -2,8 +2,13 @@ package ufc.crateus.web.traballho_final.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity(name="pets")
 public class Pet {
@@ -11,22 +16,37 @@ public class Pet {
 	@Id
 	@GeneratedValue
 	int id;
+	@NotBlank
 	String nome;
+	@NotBlank
 	String raca;
+	
+	@NotBlank
+	@Pattern(regexp = "Pequeno|Médio|Grande")
 	String porte;
+	
+	@NotBlank
+	@Pattern(regexp = "Fêmea|Macho")
 	String sexo;
+	@NotBlank
 	@Column(columnDefinition = "TEXT")
 	String caracteristicas;
+	
+	@NotBlank
 	@Column(columnDefinition = "TEXT")
 	String historia;
-	int id_user;
+	
+	//@NotBlank
+	//int id_user;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_user", nullable = false)
+	User user;
 	
 	public Pet() {
 		
 	}
 	
-	public Pet(String nome, String raca, String porte, String sexo, String caracteristicas, String historia,
-			int id_user) {
+	public Pet(String nome, String raca, String porte, String sexo, String caracteristicas, String historia, User user) {
 		super();
 		this.nome = nome;
 		this.raca = raca;
@@ -34,11 +54,10 @@ public class Pet {
 		this.sexo = sexo;
 		this.caracteristicas = caracteristicas;
 		this.historia = historia;
-		this.id_user = id_user;
+		this.user = user;
 	}
 	
-	public Pet(int id, String nome, String raca, String porte, String sexo, String caracteristicas, String historia,
-			int id_user) {
+	public Pet(int id, String nome, String raca, String porte, String sexo, String caracteristicas, String historia,User user) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -47,7 +66,7 @@ public class Pet {
 		this.sexo = sexo;
 		this.caracteristicas = caracteristicas;
 		this.historia = historia;
-		this.id_user = id_user;
+		this.user = user;
 	}
 
 	public int getId() {
@@ -106,18 +125,19 @@ public class Pet {
 		this.historia = historia;
 	}
 
-	public int getId_user() {
-		return id_user;
+
+	public User getUser() {
+		return user;
 	}
 
-	public void setId_user(int id_user) {
-		this.id_user = id_user;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
 	public String toString() {
 		return "Pet [id=" + id + ", nome=" + nome + ", raca=" + raca + ", porte=" + porte + ", sexo=" + sexo
-				+ ", caracteristicas=" + caracteristicas + ", historia=" + historia + ", id_user=" + id_user + "]";
+				+ ", caracteristicas=" + caracteristicas + ", historia=" + historia + "]";
 	}
 	
 	

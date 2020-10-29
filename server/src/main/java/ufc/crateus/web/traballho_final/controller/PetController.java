@@ -41,15 +41,15 @@ public class PetController {
 	    @RequestMapping(method = RequestMethod.POST)
 	    public ResponseEntity<Pet> addPet(@RequestBody Pet pet) {
 	        return new ResponseEntity<Pet>(petService.addPet(pet.getNome(), pet.getRaca(),pet.getPorte(), pet.getSexo(), 
-	        		pet.getCaracteristicas(), pet.getHistoria(), pet.getId_user()), HttpStatus.OK);
-	    }
-	 
+	        		pet.getCaracteristicas(), pet.getHistoria(), pet.getUser()), HttpStatus.OK);
+	    } 
+	  
 	    @RequestMapping(method = RequestMethod.PUT, value = "{id}")
 	    public ResponseEntity<Pet> updatePet(@PathVariable("id") Integer id, @RequestBody Pet pet) {
 	        return new ResponseEntity<Pet>(petService.updatePet(id, pet.getNome(), pet.getRaca(),pet.getPorte(), pet.getSexo(), 
-	        		pet.getCaracteristicas(), pet.getHistoria(), pet.getId_user()), HttpStatus.OK);
+	        		pet.getCaracteristicas(), pet.getHistoria(), pet.getUser()), HttpStatus.OK);
 	    }
-	 
+//	 
 	    @RequestMapping(method = RequestMethod.DELETE, value = "{id}")
 	    public ResponseEntity<Void> deletePet(@PathVariable("id") Integer id) {
 	        if (petService.removePet(id)) {

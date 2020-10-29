@@ -1,9 +1,16 @@
 package ufc.crateus.web.traballho_final.model;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -54,6 +61,10 @@ public class User {
 	@NotBlank
 	@Pattern(regexp = "^[0-9]{2}.[0-9]{3}-[0-9]{3}$")
 	String cep;
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL)
+	Set<Pet> pets;
 
 	public User(int id, String email, String senha, String firstName, String lastName, String telefone,
 			String logradouro, String numero, String bairro, String complemento, String cidade, String estado,
@@ -72,6 +83,7 @@ public class User {
 		this.cidade = cidade;
 		this.estado = estado;
 		this.cep = cep;
+		//this.pets = pets;
 	}
 	
 	public User(String email, String senha, String firstName, String lastName, String telefone,
@@ -90,6 +102,7 @@ public class User {
 		this.cidade = cidade;
 		this.estado = estado;
 		this.cep = cep;
+		//this.pets = pets;
 	}
 	
 	public User() {
@@ -107,6 +120,7 @@ public class User {
 	public String getEmail() {
 		return email;
 	}
+	
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -221,6 +235,15 @@ public class User {
 		this.cidade = user.cidade;
 		this.estado = user.estado;
 		this.cep = user.cep;
+		this.pets = user.pets;
+	}
+
+	public Set<Pet> getPets() {
+		return pets;
+	}
+
+	public void setPets(Set<Pet> pets) {
+		this.pets = pets;
 	}
 	
 	

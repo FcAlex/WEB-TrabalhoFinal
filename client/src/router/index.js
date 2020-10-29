@@ -22,7 +22,8 @@ const routes = [
     name: 'Ajude',
     component: function () {
       return import('../views/Ajude.vue')
-    }
+    },
+    props:true
   },
   {
     path: '/sobre',

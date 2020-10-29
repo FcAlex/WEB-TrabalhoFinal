@@ -238,7 +238,7 @@
 					</div>
 
 					<div class="d-flex justify-content-end">
-						<button type="submit" class="btn btn-primary">
+						<button type="button" @click="cadastrar" class="btn btn-primary">
 							Cadastrar
 						</button>
 					</div>
@@ -275,6 +275,7 @@ export default {
 			cidade: "",
 			estado: "",
 			cep: "",
+			pets: [],
 			senhaValida: true,
 			emailValido: true,
 			cepValido: true,
@@ -301,6 +302,7 @@ export default {
 				cidade: this.cidade.trim(),
 				estado: this.estado.trim(),
 				cep: this.cep.trim(),
+				pets: this.pets,
 			};
 
 			auth.criarConta(this, obj);

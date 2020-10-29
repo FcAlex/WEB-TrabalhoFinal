@@ -103,6 +103,7 @@
 					</div>
 				</div>
 
+
 				<div class="my-5">
 					<button
 						type="button"
@@ -138,17 +139,22 @@ export default {
 			caracteristicas: "",
 			historia: "",
 			id_user: "",
-			baseURI: "http://localhost:8080/api/pets",
+			baseURI: "http://localhost:8080/api/users",
+			baseURI2: "http://localhost:8080/api/pets",
 			baseUploadURI: "http://localhost:8080/api/upload",
 			file: null,
 			pet: {},
 			campos: false,
+			user: {},
+			pets: [],
 		};
 	},
 	created: function () {
 		if (this.$session.exists()) {
-			var user = this.$session.get("user");
-			this.id_user = JSON.parse(user).id;
+			this.user = JSON.parse(this.$session.get("user"));
+			console.log(this.user);
+			
+			this.id_user = this.user.id;
 		}
 	},
 	methods: {
@@ -179,24 +185,42 @@ export default {
 		cadastrar: function () {
 			this.validarCampos();
 			if (this.campos) {
-				if (this.$session.exists()) {
-					let obj = {
+				if (this.$session.exists()) {  
+					let obj = { //Objeto pet
 						nome: this.nome,
 						raca: this.raca,
 						porte: this.porte,
 						sexo: this.sexo,
 						caracteristicas: this.caracteristicas,
 						historia: this.historia,
-						id_user: this.id_user,
+						user: this.user
 					};
 
-					this.$http.post(this.baseURI, obj).then((result) => {
-						if (result.status === 200) {
-							alert("Cadastrado");
-							this.pet = result.data;
-							this.handleFileUpload(this.pet.id);
-						}
+					this.user.pets.push(obj)
+					let obj2 = { //Objetp user atualizado
+						email: this.user.email,
+						senha: this.user.senha,
+						firstName: this.user.firstName,
+						lastName: this.user.lastName,						
+						telefone: this.user.telefone,
+						logradouro: this.user.logradouro,
+						numero: this.user.numero,
+						bairro: this.user.bairro,
+						complemento: this.user.complemento,
+						cidade: this.user.cidade,
+						estado: this.user.estado,
+						cep: this.user.cep,
+						//pets: this.user.pets,
+						
+					};
+					this.$http.post(this.baseURI2, obj).then((result) => {
+							
 					});
+					
+					// this.$http.put(this.baseURI + "/" + this.id_user, obj2).then((result) => {
+        			// 	//this.$router.push({ name: 'Users'});
+					// });
+	  				
 				} else {
 					alert("É preciso fazer o login para continuar");
 				}

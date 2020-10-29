@@ -85,7 +85,6 @@ export default {
 	name: "PerfilPet",
 	props: {
 		id: Number,
-		id_user: Number,
 	},
 	components: {
 		Header,

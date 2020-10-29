@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ufc.crateus.web.traballho_final.model.Pet;
+import ufc.crateus.web.traballho_final.model.User;
 import ufc.crateus.web.traballho_final.repository.PetRepository;
 
 @Service
@@ -14,11 +15,10 @@ public class PetService {
 	 @Autowired
 	 PetRepository petRepo;
 	    
-	 public Pet addPet(String nome, String raca, String porte, String sexo, String caracteristicas, String historia, 
-				int id_user) {
-	      Pet pet = new Pet(nome, raca, porte, sexo, caracteristicas, historia, id_user);
+	 public Pet addPet(String nome, String raca, String porte, String sexo, String caracteristicas, String historia, User user) {
+	      Pet pet = new Pet(nome, raca, porte, sexo, caracteristicas, historia, user);
 	      return petRepo.save(pet);
-	 }
+	 } 
 	    
      public boolean removePet(Integer id) {
     	 if(petRepo.existsById(id)) {
@@ -38,8 +38,8 @@ public class PetService {
 	 }
 	    
 	
-	 public Pet updatePet(int id, String nome, String raca, String porte, String sexo, String caracteristicas, String historia, 
-				int id_user) {
+	 public Pet updatePet(int id, String nome, String raca, String porte, String sexo, String caracteristicas, String historia,
+			 User user) {
 	     Pet petAux = petRepo.findById(id).get();
 	        
 	     if(petAux != null) {
@@ -49,7 +49,7 @@ public class PetService {
 	         petAux.setSexo(sexo);
 	         petAux.setCaracteristicas(caracteristicas);
 	         petAux.setHistoria(historia);
-	         petAux.setId_user(id_user); //Tirar? 
+	         petAux.setUser(user); //Tirar? 
 	         petRepo.save(petAux);         
 	     }
 	        

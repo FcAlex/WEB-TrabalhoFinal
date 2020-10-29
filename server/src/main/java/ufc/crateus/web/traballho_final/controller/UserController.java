@@ -22,8 +22,13 @@ import ufc.crateus.web.traballho_final.service.UserService;
 @RequestMapping(path = "/api/users")
 public class UserController {
 
-	@Autowired
+	//@Autowired
 	UserService userService;
+
+	public UserController(UserService userService) {
+		super();
+		this.userService = userService;
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<User>> getUsers() {
@@ -32,7 +37,10 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "{id}")
 	public ResponseEntity<User> getUser(@Valid @PathVariable("id") Integer id) {
-		return new ResponseEntity<User>(userService.getUser(id), HttpStatus.OK);
+		System.out.println("djas");
+		ResponseEntity<User> er = new ResponseEntity<User>(userService.getUser(id), HttpStatus.OK);
+		System.out.println("fj");
+		return er;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
