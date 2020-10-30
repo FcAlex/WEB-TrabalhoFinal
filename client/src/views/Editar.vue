@@ -16,6 +16,24 @@
 						</div>
 					</div>
 
+					<div class="alert alert-info alert-dismissible fade show">
+						<strong
+							><i
+								class="fa fa-info-circle"
+								aria-hidden="true"
+							></i>
+						</strong>
+						Os campos em branco não serão atualizados
+						<button
+							type="button"
+							class="close"
+							data-dismiss="alert"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
 					<div class="form-group row">
 						<label
 							for="primeiroNome"
@@ -122,7 +140,9 @@
 								v-model="telefone"
 								required
 								@blur="validarTelefone"
-								:class="{ 'is-invalid': telefoneValido === false }"
+								:class="{
+									'is-invalid': telefoneValido === false,
+								}"
 							/>
 						</div>
 					</div>
@@ -239,6 +259,7 @@
 							Cadastrar
 						</button>
 					</div>
+					<router-link to="/perfilUsuario">Voltar</router-link>
 				</div>
 			</form>
 		</section>
@@ -281,9 +302,11 @@ export default {
 	},
 	created: function () {
 		if (this.$session.exists()) {
-			this.$http.get(this.baseURI + "/" + this.$session.id()).then((result) => {
-				this.data = result.data;
-			});
+			this.$http
+				.get(this.baseURI + "/" + this.$session.id())
+				.then((result) => {
+					this.data = result.data;
+				});
 		} else {
 			this.$router.replace("/");
 		}
@@ -291,18 +314,51 @@ export default {
 	methods: {
 		atualizar: function () {
 			let obj = {
-				firstName: this.firstName,
-				lastName: this.lastName,
-				email: this.email,
-				senha: this.senha,
-				telefone: this.telefone,
-				logradouro: this.logradouro,
-				numero: this.numero,
-				bairro: this.bairro,
-				complemento: this.complemento,
-				cidade: this.cidade,
-				estado: this.estado,
-				cep: this.cep,
+				firstName:
+					this.firstName == ""
+						? this.data.firstName.trim()
+						: this.firstName.trim(),
+				lastName:
+					this.lastName == ""
+						? this.data.lastName.trim()
+						: this.lastName.trim(),
+				email:
+					this.email == ""
+						? this.data.email.trim()
+						: this.email.trim(),
+				senha:
+					this.senha == ""
+						? this.data.senha.trim()
+						: this.senha.trim(),
+				telefone:
+					this.telefone == ""
+						? this.data.telefone.trim()
+						: this.telefone.trim(),
+				logradouro:
+					this.logradouro == ""
+						? this.data.logradouro.trim()
+						: this.logradouro.trim(),
+				numero:
+					this.numero == ""
+						? this.data.numero.trim()
+						: this.numero.trim(),
+				bairro:
+					this.bairro == ""
+						? this.data.bairro.trim()
+						: this.bairro.trim(),
+				complemento:
+					this.complemento == ""
+						? this.data.complemento.trim()
+						: this.complemento.trim(),
+				cidade:
+					this.cidade == ""
+						? this.data.cidade.trim()
+						: this.cidade.trim(),
+				estado:
+					this.estado == ""
+						? this.data.estado.trim()
+						: this.estado.trim(),
+				cep: this.cep == "" ? this.data.cep.trim() : this.cep.trim(),
 			};
 			this.$http
 				.put(this.baseURI + "/" + this.data.id, obj)

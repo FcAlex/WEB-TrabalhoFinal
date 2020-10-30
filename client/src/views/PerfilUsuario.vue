@@ -106,9 +106,12 @@
 									<div class="col-12">
 										<p class="">Endereço</p>
 										<h6 class="text-muted">
-											{{ data.logradouro }}, nr. {{data.numero}}, {{data.bairro}},
+											{{ data.logradouro }}, nr.
+											{{ data.numero }},
+											{{ data.bairro }},
 											{{ data.complemento }},
-											{{ data.cidade }}-{{ data.estado }}, {{data.cep}}
+											{{ data.cidade }}-{{ data.estado }},
+											{{ data.cep }}
 										</h6>
 									</div>
 								</div>
@@ -117,7 +120,11 @@
 								class="tab-pane container fade"
 								id="configuracao"
 							>
-								<button type="button" class="btn btn-info mx-2" @click="$router.replace('/editarUser')">
+								<button
+									type="button"
+									class="btn btn-info mx-2"
+									@click="$router.replace('/editarUser')"
+								>
 									<i
 										class="fa fa-info-circle"
 										aria-hidden="true"
@@ -200,53 +207,89 @@
 									</div>
 								</div>
 							</div>
-							<div
-								class="tab-pane container fade"
-								id="pets"
-							>
-								
+							<div class="tab-pane container fade" id="pets">
 								<div class="text-center">
-									<h3> Meus pets </h3>
+									<h2 class="h3">Meus pets</h2>
 								</div>
-								<div v-for="pet in pets" :key="pet.id" class="card m-2" >
-									
+								<div v-show="pets == ''" class="my-4">
+									<h3 class="h4 text-center">
+										<i
+											class="fa fa-exclamation-circle"
+											aria-hidden="true"
+										></i>
+										Você não possui pets cadastrados!
+									</h3>
+								</div>
+								<div
+									v-for="pet in pets"
+									:key="pet.id"
+									class="card m-2"
+								>
 									<div class="card-body">
-									<div>
-										<div class="header">
-										<div class="row">
-											<div class="col-4 d-flex" >
-													<img
-
-														:src="'uploads/pet/' + pet.id"
-														class="rounded img-thumbnail profileT pet"
-														alt="profile-image"
-														onerror="this.src='static/pet.png'"
-													/>
-											</div>
-											<hr />
-											<div class="col-8 d-flex" >
-											
-													<div class="text-center">
-														<h5> <strong> {{pet.nome}} </strong> </h5>
-														<p> <strong> Raça: </strong>  {{ pet.raca }}</p>
-														<p> <strong> Porte: </strong>  {{ pet.porte }}</p>
-														<p> <strong> Sexo: </strong>  {{ pet.sexo }}</p>
+										<div>
+											<div class="header">
+												<div class="row">
+													<div class="col-4 d-flex">
+														<img
+															:src="
+																'uploads/pet/' +
+																pet.id
+															"
+															class="rounded img-thumbnail profileT pet"
+															alt="profile-image"
+															onerror="this.src='static/pet.png'"
+														/>
 													</div>
+													<hr />
+													<div class="col-8 d-flex">
+														<div
+															class="text-center"
+														>
+															<h5>
+																<strong>
+																	{{
+																		pet.nome
+																	}}
+																</strong>
+															</h5>
+															<p>
+																<strong>
+																	Raça:
+																</strong>
+																{{ pet.raca }}
+															</p>
+															<p>
+																<strong>
+																	Porte:
+																</strong>
+																{{ pet.porte }}
+															</p>
+															<p>
+																<strong>
+																	Sexo:
+																</strong>
+																{{ pet.sexo }}
+															</p>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="left">
+												<p></p>
+												<p>
+													<strong>
+														Caracteristicas:
+													</strong>
+													{{ pet.caracteristicas }}
+												</p>
+												<p>
+													<strong> História: </strong>
+													{{ pet.historia }}
+												</p>
 											</div>
 										</div>
-										
 									</div>
-										<div class="left">
-											<p> </p>
-											<p> <strong> Caracteristicas: </strong> {{ pet.caracteristicas }}
-											</p>
-											<p> <strong> História: </strong> {{ pet.historia }}</p>
-										</div>
-									</div>
-									</div>
-				
 								</div>
-
 							</div>
 						</div>
 					</div>
@@ -286,7 +329,7 @@ export default {
 		},
 		handleFileUpload(id) {
 			this.file = this.$refs.image.files[0];
-		
+
 			let form = new FormData();
 			form.append("resource", "user");
 			form.append("id", id);
@@ -313,14 +356,15 @@ export default {
 					console.log(e);
 				});
 		},
-		selecionarPets(){
-			this.$http.get(this.baseURI2 + "/search?id_user="+this.data.id)
-					.then((result) => {
-						pets = result.data;
-					})
-					.catch(function(error) {
-						console.log(error);
-					});
+		selecionarPets() {
+			this.$http
+				.get(this.baseURI2 + "/search?id_user=" + this.data.id)
+				.then((result) => {
+					pets = result.data;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
 		},
 	},
 	created: function () {
@@ -328,23 +372,24 @@ export default {
 			this.data = JSON.parse(this.$session.get("user"));
 			//console.log(this.$session.get("user"));
 			//this.$http.get(this.baseURI + "/" + user.id).then((result) => {
-				//this.data = result.data;
+			//this.data = result.data;
 			//});
 		} else {
 			this.$router.replace("/");
 		}
 	},
-	mounted :function (){
-			this.$http.get(this.baseURI2 + "/search?id_user="+this.data.id)
-					.then((result) => {
-						//console.log(this.pets);
-						this.pets = result.data;
-					})
-					.catch(function(error) {
-						console.log(this.data);
-						console.log(error);
-					});
-	}
+	mounted: function () {
+		this.$http
+			.get(this.baseURI2 + "/search?id_user=" + this.data.id)
+			.then((result) => {
+				//console.log(this.pets);
+				this.pets = result.data;
+			})
+			.catch(function (error) {
+				console.log(this.data);
+				console.log(error);
+			});
+	},
 };
 </script>
  
@@ -357,14 +402,13 @@ export default {
 }
 
 .profileT {
-    max-width:200px;
-    max-height:150px;
-    width: auto;
-    height: auto;
+	max-width: 200px;
+	max-height: 150px;
+	width: auto;
+	height: auto;
 }
 
-.divs{
+.divs {
 	margin-block-end: 10px;
 }
-
 </style>

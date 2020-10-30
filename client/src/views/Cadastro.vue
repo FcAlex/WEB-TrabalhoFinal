@@ -290,18 +290,18 @@ export default {
 	methods: {
 		cadastrar: function () {
 			let obj = {
-				firstName: this.firstName.trim(),
-				lastName: this.lastName.trim(),
-				email: this.email.trim(),
-				senha: this.senha.trim(),
-				telefone: this.telefone.trim(),
-				logradouro: this.logradouro.trim(),
-				numero: this.numero.trim(),
-				bairro: this.bairro.trim(),
-				complemento: this.complemento.trim(),
-				cidade: this.cidade.trim(),
-				estado: this.estado.trim(),
-				cep: this.cep.trim(),
+				firstName: this.firstName == "" ? this.data.firstName.trim() : this.firstName.trim(),
+				lastName: this.lastName == "" ? this.data.lastName.trim() : this.lastName.trim(),
+				email: this.email == "" ? this.data.email.trim() : this.email.trim(),
+				senha: this.senha == "" ? this.data.senha.trim() : this.senha.trim(),
+				telefone: this.telefone == "" ? this.data.telefone.trim() : this.telefone.trim(),
+				logradouro: this.logradouro == "" ? this.data.logradouro.trim() : this.logradouro.trim(),
+				numero: this.numero == "" ? this.data.numero.trim() : this.numero.trim(),
+				bairro: this.bairro == "" ? this.data.bairro.trim() : this.bairro.trim(),
+				complemento: this.complemento == "" ? this.data.complemento.trim() : this.complemento.trim(),
+				cidade: this.cidade == "" ? this.data.cidade.trim() : this.cidade.trim(),
+				estado: this.estado == "" ? this.data.estado.trim() : this.estado.trim(),
+				cep: this.cep == "" ? this.data.cep.trim() : this.cep.trim(),
 				//pets: this.pets,
 			};
 
