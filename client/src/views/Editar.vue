@@ -12,7 +12,7 @@
 					<hr />
 					<div class="form-group row">
 						<div class="col-md-11 control-label text-right">
-							<p class="help-block">* Campo Obrigatório</p>
+							<p class="help-block">* Campo  bObrigatório</p>
 						</div>
 					</div>
 

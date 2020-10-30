@@ -4,12 +4,18 @@
 		<section class="container text-center p-4">
 			<h1><i class="fa fa-paw"></i> Encontre seu novo amigo</h1>
 			<hr class="mt-3 mb-4" />
+			<div v-show="pets == ''" class="my-4">
+				<h3 class="h4 text-center">
+					<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+					Não foi possível encontrar pets cadastrados!
+				</h3>
+			</div>
 			<div id="addCardsPets" class="row">
 				<div class="col-4" v-for="pet in pets" :key="pet.id">
 					<div class="card mb-2">
 						<img
 							class="card-img-top rounded mx-auto d-block rounded mt-2 usuario"
-							:src="'uploads/pet/' + + pet.id"
+							:src="'uploads/pet/' + +pet.id"
 							alt="Imagem de capa do card"
 							onerror="this.src='static/pet.png'"
 						/>
@@ -42,7 +48,8 @@
 				</div>
 			</div>
 		</section>
-		<Footer></Footer>
+		<Footer v-if="pets == ''" fixed="footer fixed-bottom"></Footer>
+		<Footer v-else></Footer>
 	</div>
 </template>
 
@@ -74,7 +81,7 @@ export default {
 			.catch(function (error) {
 				console.log(error);
 			});
-	}
+	},
 };
 </script>
 
