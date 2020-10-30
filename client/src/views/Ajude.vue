@@ -193,26 +193,26 @@ export default {
 						sexo: this.sexo,
 						caracteristicas: this.caracteristicas,
 						historia: this.historia,
-						user: this.user
+						id_user: this.user.id
 					};
 
-					this.user.pets.push(obj)
-					let obj2 = { //Objetp user atualizado
-						email: this.user.email,
-						senha: this.user.senha,
-						firstName: this.user.firstName,
-						lastName: this.user.lastName,						
-						telefone: this.user.telefone,
-						logradouro: this.user.logradouro,
-						numero: this.user.numero,
-						bairro: this.user.bairro,
-						complemento: this.user.complemento,
-						cidade: this.user.cidade,
-						estado: this.user.estado,
-						cep: this.user.cep,
-						//pets: this.user.pets,
+					// this.user.pets.push(obj)
+					// let obj2 = { //Objetp user atualizado
+					// 	email: this.user.email,
+					// 	senha: this.user.senha,
+					// 	firstName: this.user.firstName,
+					// 	lastName: this.user.lastName,						
+					// 	telefone: this.user.telefone,
+					// 	logradouro: this.user.logradouro,
+					// 	numero: this.user.numero,
+					// 	bairro: this.user.bairro,
+					// 	complemento: this.user.complemento,
+					// 	cidade: this.user.cidade,
+					// 	estado: this.user.estado,
+					// 	cep: this.user.cep,
+					// 	pets: this.user.pets,
 						
-					};
+					// };
 					this.$http.post(this.baseURI2, obj).then((result) => {
 							
 					});

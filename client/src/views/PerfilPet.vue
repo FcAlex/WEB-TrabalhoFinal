@@ -102,7 +102,8 @@ export default {
 		this.$http
 			.get(this.baseURI + "/" + this.id)
 			.then((result) => {
-        this.pet = result.data;
+		this.pet = result.data;
+		console.log(this.pet);
         this.buscarUsuario(this.pet.id_user)
 			})
 			.catch(function (error) {
@@ -115,6 +116,7 @@ export default {
 				.get(this.baseUserURI + "/" + id)
 				.then((result) => {
 					this.user = result.data;
+					console.log(this.user);
 				})
 				.catch(function (error) {
 					console.log(error);

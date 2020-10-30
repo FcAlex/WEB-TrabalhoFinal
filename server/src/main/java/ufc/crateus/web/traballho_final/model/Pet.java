@@ -38,15 +38,17 @@ public class Pet {
 	
 	//@NotBlank
 	//int id_user;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_user", nullable = false)
-	User user;
-	
+//	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "id_user", nullable = false)
+//	User user;
+//	
+	//@JoinColumn(name = "id_user" )
+	int id_user;
 	public Pet() {
 		
 	}
 	
-	public Pet(String nome, String raca, String porte, String sexo, String caracteristicas, String historia, User user) {
+	public Pet(String nome, String raca, String porte, String sexo, String caracteristicas, String historia, int id_user) {
 		super();
 		this.nome = nome;
 		this.raca = raca;
@@ -54,10 +56,11 @@ public class Pet {
 		this.sexo = sexo;
 		this.caracteristicas = caracteristicas;
 		this.historia = historia;
-		this.user = user;
+		this.id_user = id_user;
 	}
 	
-	public Pet(int id, String nome, String raca, String porte, String sexo, String caracteristicas, String historia,User user) {
+	public Pet(int id, String nome, String raca, String porte, String sexo, String caracteristicas, String historia, int id_user
+			) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -66,7 +69,15 @@ public class Pet {
 		this.sexo = sexo;
 		this.caracteristicas = caracteristicas;
 		this.historia = historia;
-		this.user = user;
+		this.id_user = id_user;
+	}
+
+	public int getId_user() {
+		return id_user;
+	}
+
+	public void setId_user(int id_user) {
+		this.id_user = id_user;
 	}
 
 	public int getId() {
@@ -126,13 +137,13 @@ public class Pet {
 	}
 
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 
 	@Override
 	public String toString() {

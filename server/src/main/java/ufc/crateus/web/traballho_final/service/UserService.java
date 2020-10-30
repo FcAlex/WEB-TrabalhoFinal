@@ -19,7 +19,7 @@ public class UserService {
 	UserRepository userRepo;
 	PetRepository petRepo;
 	
-	@Transactional
+	//@Transactional
 	public User addUser(User user) {
 		// verify user
 		
@@ -30,8 +30,8 @@ public class UserService {
 //				System.out.println("error");
 //				return null;
 //			}
-				
-	//	}
+//				
+//		}
 		User savedUser =  userRepo.save(user);
 		if(userRepo.findById(savedUser.getId()).isPresent()) {
 			System.out.println("Aqui");
@@ -82,7 +82,7 @@ public class UserService {
 //					return null;
 //				}
 //					
-			//}
+//			}
 			
 			return userRepo.save(res);
 		}

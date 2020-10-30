@@ -302,7 +302,7 @@ export default {
 				cidade: this.cidade.trim(),
 				estado: this.estado.trim(),
 				cep: this.cep.trim(),
-				pets: this.pets,
+				//pets: this.pets,
 			};
 
 			auth.criarConta(this, obj);

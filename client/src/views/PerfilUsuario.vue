@@ -205,6 +205,49 @@
 								id="pets"
 							>
 								
+								<div class="text-center">
+									<h3> Meus pets </h3>
+								</div>
+								<div v-for="pet in pets" :key="pet.id" class="card m-2" >
+									
+									<div class="card-body">
+									<div>
+										<div class="header">
+										<div class="row">
+											<div class="col-4 d-flex" >
+													<img
+
+														:src="'uploads/pet/' + pet.id"
+														class="rounded img-thumbnail profileT pet"
+														alt="profile-image"
+														onerror="this.src='static/pet.png'"
+													/>
+											</div>
+											<hr />
+											<div class="col-8 d-flex" >
+											
+													<div class="text-center">
+														<h5> <strong> {{pet.nome}} </strong> </h5>
+														<p> <strong> Raça: </strong>  {{ pet.raca }}</p>
+														<p> <strong> Porte: </strong>  {{ pet.porte }}</p>
+														<p> <strong> Sexo: </strong>  {{ pet.sexo }}</p>
+													</div>
+											</div>
+										</div>
+										
+									</div>
+										<div class="left">
+											<p> </p>
+											<p> <strong> Caracteristicas: </strong> {{ pet.caracteristicas }} oajfksssssssssssssssssssssssssajjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+												sajkfffffffffffffffffff
+											</p>
+											<p> <strong> História: </strong> {{ pet.historia }}</p>
+										</div>
+									</div>
+									</div>
+				
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -229,9 +272,11 @@ export default {
 	},
 	data() {
 		return {
+			pets: [],
 			file: "",
 			data: "",
 			baseURI: "http://localhost:8080/api/users",
+			baseURI2: "http://localhost:8080/api/pets",
 			baseUploadURI: "http://localhost:8080/api/upload",
 		};
 	},
@@ -268,12 +313,21 @@ export default {
 				.catch((e) => {
 					console.log(e);
 				});
-		}
+		},
+		selecionarPets(){
+			this.$http.get(this.baseURI2 + "/search?id_user="+this.data.id)
+					.then((result) => {
+						pets = result.data;
+					})
+					.catch(function(error) {
+						console.log(error);
+					});
+		},
 	},
 	created: function () {
 		if (this.$session.exists()) {
-			var user = JSON.parse(this.$session.get("user"));
-			this.data = user;
+			this.data = JSON.parse(this.$session.get("user"));
+			console.log(this.$session.get("user"));
 			//this.$http.get(this.baseURI + "/" + user.id).then((result) => {
 				//this.data = result.data;
 			//});
@@ -281,6 +335,19 @@ export default {
 			this.$router.replace("/");
 		}
 	},
+	mounted :function (){
+		console.log("here");
+		console.log(this.data.id);
+			this.$http.get(this.baseURI2 + "/search?id_user="+this.data.id)
+					.then((result) => {
+						console.log(this.pets);
+						this.pets = result.data;
+					})
+					.catch(function(error) {
+						console.log(this.data);
+						console.log(error);
+					});
+	}
 };
 </script>
  
@@ -291,4 +358,16 @@ export default {
 	object-fit: cover;
 	object-position: top;
 }
+
+.profileT {
+    max-width:200px;
+    max-height:150px;
+    width: auto;
+    height: auto;
+}
+
+.divs{
+	margin-block-end: 10px;
+}
+
 </style>

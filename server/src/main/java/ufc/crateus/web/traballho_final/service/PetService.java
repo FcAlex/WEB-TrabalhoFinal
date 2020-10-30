@@ -15,8 +15,8 @@ public class PetService {
 	 @Autowired
 	 PetRepository petRepo;
 	    
-	 public Pet addPet(String nome, String raca, String porte, String sexo, String caracteristicas, String historia, User user) {
-	      Pet pet = new Pet(nome, raca, porte, sexo, caracteristicas, historia, user);
+	 public Pet addPet(String nome, String raca, String porte, String sexo, String caracteristicas, String historia, int id_user) {
+	      Pet pet = new Pet(nome, raca, porte, sexo, caracteristicas, historia, id_user);
 	      return petRepo.save(pet);
 	 } 
 	    
@@ -39,7 +39,7 @@ public class PetService {
 	    
 	
 	 public Pet updatePet(int id, String nome, String raca, String porte, String sexo, String caracteristicas, String historia,
-			 User user) {
+			int id_user) {
 	     Pet petAux = petRepo.findById(id).get();
 	        
 	     if(petAux != null) {
@@ -49,10 +49,16 @@ public class PetService {
 	         petAux.setSexo(sexo);
 	         petAux.setCaracteristicas(caracteristicas);
 	         petAux.setHistoria(historia);
-	         petAux.setUser(user); //Tirar? 
+	         petAux.setId_user(id_user); //Tirar? 
 	         petRepo.save(petAux);         
 	     }
 	        
 	     return petAux;
+	 }
+	 
+	 public List<Pet> getById_user(int id_user){
+		 
+		
+		 return petRepo.findById_user(id_user);
 	 }
 }
