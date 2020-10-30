@@ -238,8 +238,7 @@
 									</div>
 										<div class="left">
 											<p> </p>
-											<p> <strong> Caracteristicas: </strong> {{ pet.caracteristicas }} oajfksssssssssssssssssssssssssajjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-												sajkfffffffffffffffffff
+											<p> <strong> Caracteristicas: </strong> {{ pet.caracteristicas }}
 											</p>
 											<p> <strong> História: </strong> {{ pet.historia }}</p>
 										</div>
@@ -327,7 +326,7 @@ export default {
 	created: function () {
 		if (this.$session.exists()) {
 			this.data = JSON.parse(this.$session.get("user"));
-			console.log(this.$session.get("user"));
+			//console.log(this.$session.get("user"));
 			//this.$http.get(this.baseURI + "/" + user.id).then((result) => {
 				//this.data = result.data;
 			//});
@@ -336,11 +335,9 @@ export default {
 		}
 	},
 	mounted :function (){
-		console.log("here");
-		console.log(this.data.id);
 			this.$http.get(this.baseURI2 + "/search?id_user="+this.data.id)
 					.then((result) => {
-						console.log(this.pets);
+						//console.log(this.pets);
 						this.pets = result.data;
 					})
 					.catch(function(error) {

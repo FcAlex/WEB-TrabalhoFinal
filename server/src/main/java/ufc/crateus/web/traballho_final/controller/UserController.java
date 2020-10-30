@@ -65,8 +65,6 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     public ResponseEntity<User> loginUser(String email, String senha) {
     	
-    	System.out.println("--> " + email + " --> " + senha);
-    	
     	User user = userService.getByEmailandPassword(email, senha);
     	
     	if(user == null) {

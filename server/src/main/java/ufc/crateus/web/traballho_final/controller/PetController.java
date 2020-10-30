@@ -38,6 +38,11 @@ public class PetController {
 	    public ResponseEntity<List<Pet>>  getPetById_user(@RequestParam("id_user") Integer id_user) {
 	        return new ResponseEntity<List<Pet>> (petService.getById_user(id_user), HttpStatus.OK);
 	    }
+	    
+	    @RequestMapping(method = RequestMethod.GET, value = "/search", params="nome")
+	    public ResponseEntity<List<Pet>>  getPetByRaca(@RequestParam("nome") String nome) {
+	        return new ResponseEntity<List<Pet>> (petService.getPetByRaca(nome), HttpStatus.OK);
+	    }
 	 
 	    @RequestMapping(method = RequestMethod.POST)
 	    public ResponseEntity<Pet> addPet(@RequestBody Pet pet) {
@@ -50,7 +55,7 @@ public class PetController {
 	        return new ResponseEntity<Pet>(petService.updatePet(id, pet.getNome(), pet.getRaca(),pet.getPorte(), pet.getSexo(), 
 	        		pet.getCaracteristicas(), pet.getHistoria(), pet.getId_user()), HttpStatus.OK);
 	    }
-//	 
+	 
 	    @RequestMapping(method = RequestMethod.DELETE, value = "{id}")
 	    public ResponseEntity<Void> deletePet(@PathVariable("id") Integer id) {
 	        if (petService.removePet(id)) {

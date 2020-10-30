@@ -57,8 +57,10 @@ public class PetService {
 	 }
 	 
 	 public List<Pet> getById_user(int id_user){
-		 
-		
 		 return petRepo.findById_user(id_user);
 	 }
+
+	public List<Pet> getPetByRaca(String nome) {
+		return petRepo.findByRaca(nome);
+	}
 }
