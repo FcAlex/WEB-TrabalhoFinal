@@ -52,6 +52,7 @@ public class PetController {
 	  
 	    @RequestMapping(method = RequestMethod.PUT, value = "{id}")
 	    public ResponseEntity<Pet> updatePet(@PathVariable("id") Integer id, @RequestBody Pet pet) {
+	    	System.out.println(pet.getSexo());
 	        return new ResponseEntity<Pet>(petService.updatePet(id, pet.getNome(), pet.getRaca(),pet.getPorte(), pet.getSexo(), 
 	        		pet.getCaracteristicas(), pet.getHistoria(), pet.getId_user()), HttpStatus.OK);
 	    }
