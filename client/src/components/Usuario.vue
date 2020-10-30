@@ -1,15 +1,15 @@
 <template>
 	<div class="container">
-		<div class="row">
-			<div class="col-4">
+		<div class="row usuario">
+			<div class="col-5">
 				<img
 					:src="'uploads/user/' + user.id"
-					class="img-thumbnail profileUser"
+					class="rounded img-thumbnail profileUser"
 					alt="profile-image"
 					onerror="this.src='static/pet.png'"
 				/>
 			</div>
-			<div class="col-8">
+			<div class="col-7">
 				<div class="text-center">
 					<h5 class="font-weight-bold">
 						Este é {{ user.firstName }} {{ user.lastName }}!
@@ -47,6 +47,7 @@ export default {
 <style>
 .profileUser {
 	width: 200px;
+	height: 200px;
 	object-fit: cover;
 	object-position: top;
 }

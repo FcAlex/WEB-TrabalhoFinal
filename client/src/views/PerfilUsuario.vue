@@ -10,15 +10,15 @@
 							class="rounded-circle img-thumbnail profile"
 							alt="Imagem do Usuário"
 							onerror="this.src='static/pet.png'"
-							/>
+						/>
 						<div class="d-flex justify-content-center">
 							<label
 								for="image"
 								class="badge badge-info p-2 m-2"
 								style="cursor: pointer"
 								><i class="fa fa-camera" aria-hidden="true"></i>
-							Alterar Imagem</label
-								>
+								Alterar Imagem</label
+							>
 							<input
 								class="file-upload d-none"
 								id="image"
@@ -27,7 +27,7 @@
 								ref="image"
 								accept="image/*"
 								@change="selecionarImagem()"
-								/>
+							/>
 						</div>
 					</div>
 				</div>
@@ -46,11 +46,11 @@
 									aria-controls="home"
 									aria-selected="true"
 									><i
-									class="fa fa-user"
-									aria-hidden="true"
+										class="fa fa-user"
+										aria-hidden="true"
 									></i>
-								Seus dados</a
-									>
+									Seus dados</a
+								>
 							</li>
 							<li class="nav-item">
 								<a
@@ -60,13 +60,13 @@
 									role="tab"
 									aria-controls="profile"
 									aria-selected="false"
-									>
-								<i
-									class="fa fa-wrench"
-									aria-hidden="true"
+								>
+									<i
+										class="fa fa-wrench"
+										aria-hidden="true"
 									></i>
-								Opções</a
-									>
+									Opções</a
+								>
 							</li>
 							<li class="nav-item">
 								<a
@@ -76,10 +76,10 @@
 									role="tab"
 									aria-controls="profile"
 									aria-selected="false"
-									>
-								<i class="fa fa-paw" aria-hidden="true"></i>
-								Adoção</a
-									>
+								>
+									<i class="fa fa-paw" aria-hidden="true"></i>
+									Adoção</a
+								>
 							</li>
 						</ul>
 						<div class="tab-content p-3">
@@ -116,55 +116,49 @@
 							<div
 								class="tab-pane container fade"
 								id="configuracao"
-								>
+							>
 								<button
 									type="button"
 									class="btn btn-info mx-2"
 									@click="$router.replace('/editarUser')"
-									>
-								<i
-									class="fa fa-info-circle"
-									aria-hidden="true"
+								>
+									<i
+										class="fa fa-info-circle"
+										aria-hidden="true"
 									></i>
-								Alterar dados
+									Alterar dados
 								</button>
 								<button
 									type="button"
 									class="btn btn-danger mx-2"
 									data-toggle="modal"
 									data-target="#deletarConta"
-									>
-								<i
-									class="fa fa-exclamation-triangle"
-									aria-hidden="true"
-									></i>
-								Deletar conta
+								>
+									<i class="fa fa-trash-o" aria-hidden="true"></i>
+									Deletar conta
 								</button>
 								<div class="modal fade" id="deletarConta">
 									<div
 										class="modal-dialog modal-dialog-centered"
 										role="document"
-										>
+									>
 										<div class="modal-content">
 											<div class="modal-header">
 												<h5
 													class="modal-title"
 													id="exampleModalLongTitle"
-													>
+												>
+													<i class="fa fa-trash" aria-hidden="true"></i> | 
 													Você realmente deseja isso?
-													<i
-														class="fa fa-frown-o"
-														aria-hidden="true"
-														></i>
 												</h5>
 												<button
 													type="button"
 													class="close"
 													data-dismiss="modal"
 													aria-label="Close"
-													>
-												<span aria-hidden="true"
-													>&times;</span
+												>
+													<span aria-hidden="true"
+														>&times;</span
 													>
 												</button>
 											</div>
@@ -172,11 +166,11 @@
 												<div
 													class="alert alert-danger"
 													role="alert"
-													>
+												>
 													<i
 														class="fa fa-exclamation-circle"
 														aria-hidden="true"
-														></i>
+													></i>
 													Se você confirmar, todos os
 													seus dados serão perdidos.
 												</div>
@@ -186,16 +180,16 @@
 													type="button"
 													class="btn btn-primary"
 													data-dismiss="modal"
-													>
-												Fechar
+												>
+													Fechar
 												</button>
 												<button
 													type="button"
 													class="btn btn-secondary"
 													@click="deletarConta()"
 													data-dismiss="modal"
-													>
-												Confirmar
+												>
+													Confirmar
 												</button>
 											</div>
 										</div>
@@ -211,7 +205,7 @@
 										<i
 											class="fa fa-exclamation-circle"
 											aria-hidden="true"
-											></i>
+										></i>
 										Você não possui pets cadastrados!
 									</h3>
 								</div>
@@ -219,7 +213,7 @@
 									v-for="pet in pets"
 									:key="pet.id"
 									class="card m-2"
-									>
+								>
 									<div class="card-body">
 										<div>
 											<div class="header">
@@ -227,41 +221,39 @@
 													<div class="col-4 d-flex">
 														<img
 															:src="
-															'uploads/pet/' +
-															pet.id
+																'uploads/pet/' +
+																pet.id
 															"
 															class="rounded img-thumbnail profileT pet"
 															alt="profile-image"
 															onerror="this.src='static/pet.png'"
-															/>
+														/>
 													</div>
 													<hr />
-													<div class="col-8 d-flex">
+													<div class="col-8">
 														<div
-															class="text-center"
+															class="ml-3 text-left"
+														>
+															<h5
+																class="text-weight-bold"
 															>
-															<h5>
-																<strong>
-																{{
-																pet.nome
-																}}
-																</strong>
+																{{ pet.nome }}
 															</h5>
 															<p>
 																<strong>
-																Raça:
+																	Raça:
 																</strong>
 																{{ pet.raca }}
 															</p>
 															<p>
 																<strong>
-																Porte:
+																	Porte:
 																</strong>
 																{{ pet.porte }}
 															</p>
 															<p>
 																<strong>
-																Sexo:
+																	Sexo:
 																</strong>
 																{{ pet.sexo }}
 															</p>
@@ -273,7 +265,7 @@
 												<p></p>
 												<p>
 													<strong>
-													Caracteristicas:
+														Caracteristicas:
 													</strong>
 													{{ pet.caracteristicas }}
 												</p>
@@ -288,38 +280,46 @@
 												<button
 													type="button"
 													class="btn btn-success"
-													data-toggle="modal" data-target="#deletarPet"
-													>
-												<i
-													class="fa fa-check-circle-o"
-													aria-hidden="true"
+													data-toggle="modal"
+													data-target="#deletarPet"
+												>
+													<i
+														class="fa fa-check-circle-o"
+														aria-hidden="true"
 													></i>
-												Adotado!
+													Adotado!
 												</button>
 												<button
 													type="button"
 													class="btn btn-info mx-2"
-													>
-												<i
-													class="fa fa-wrench"
-													aria-hidden="true"
+												>
+													<i
+														class="fa fa-wrench"
+														aria-hidden="true"
 													></i>
-												Alterar dados
+													Alterar dados
 												</button>
 												<div
 													class="modal fade"
 													id="deletarPet"
-													>
+												>
 													<div
 														class="modal-dialog modal-dialog-centered"
 														role="document"
+													>
+														<div
+															class="modal-content"
 														>
-														<div class="modal-content">
-															<div class="modal-header">
+															<div
+																class="modal-header"
+															>
 																<h5
 																	class="modal-title"
-																	>
-																	<i class="fa fa-star" aria-hidden="true"></i>
+																>
+																	<i
+																		class="fa fa-star"
+																		aria-hidden="true"
+																	></i>
 																	Adotado!
 																</h5>
 																<button
@@ -327,42 +327,50 @@
 																	class="close"
 																	data-dismiss="modal"
 																	aria-label="Close"
-																	>
-																<span
-																	aria-hidden="true"
-																	>&times;</span
+																>
+																	<span
+																		aria-hidden="true"
+																		>&times;</span
 																	>
 																</button>
 															</div>
 															<div
 																class="modal-body"
-																>
+															>
 																<div
 																	class="alert alert-success"
 																	role="alert"
-																	>
-																	Que ótimo! Os dados serão removidos da lista de pets para adoção.
+																>
+																	Que ótimo!
+																	Os dados
+																	serão
+																	removidos da
+																	lista de
+																	pets para
+																	adoção.
 																</div>
 															</div>
 															<div
 																class="modal-footer"
-																>
+															>
 																<button
 																	type="button"
 																	class="btn btn-primary"
 																	data-dismiss="modal"
-																	>
-																Voltar
+																>
+																	Voltar
 																</button>
 																<button
 																	type="button"
 																	class="btn btn-success"
 																	@click="
-																	deletarPet(pet.id)
+																		deletarPet(
+																			pet.id
+																		)
 																	"
 																	data-dismiss="modal"
-																	>
-																Confirmar
+																>
+																	Confirmar
 																</button>
 															</div>
 														</div>
@@ -382,120 +390,120 @@
 	</div>
 </template>
 <script>
-	import Header from "@/components/Header.vue";
-	import Footer from "@/components/Footer.vue";
-	import auth from "../auth";
-	
-	export default {
-		name: "PerfilUsuario",
-		components: {
-			Header,
-			Footer,
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+import auth from "../auth";
+
+export default {
+	name: "PerfilUsuario",
+	components: {
+		Header,
+		Footer,
+	},
+	data() {
+		return {
+			pets: [],
+			file: "",
+			data: "",
+			baseURI: "http://localhost:8080/api/users",
+			baseURI2: "http://localhost:8080/api/pets",
+			baseUploadURI: "http://localhost:8080/api/upload",
+		};
+	},
+	methods: {
+		selecionarImagem() {
+			this.handleFileUpload(this.data.id);
+			location.reload();
 		},
-		data() {
-			return {
-				pets: [],
-				file: "",
-				data: "",
-				baseURI: "http://localhost:8080/api/users",
-				baseURI2: "http://localhost:8080/api/pets",
-				baseUploadURI: "http://localhost:8080/api/upload",
-			};
+		handleFileUpload(id) {
+			this.file = this.$refs.image.files[0];
+
+			let form = new FormData();
+			form.append("resource", "user");
+			form.append("id", id);
+			form.append("file", this.file);
+
+			this.$http
+				.put(this.baseUploadURI, form, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				})
+				.then((result) => {
+					console.log(result);
+				});
 		},
-		methods: {
-			selecionarImagem() {
-				this.handleFileUpload(this.data.id);
-				location.reload();
-			},
-			handleFileUpload(id) {
-				this.file = this.$refs.image.files[0];
-	
-				let form = new FormData();
-				form.append("resource", "user");
-				form.append("id", id);
-				form.append("file", this.file);
-	
-				this.$http
-					.put(this.baseUploadURI, form, {
-						headers: {
-							"Content-Type": "multipart/form-data",
-						},
-					})
-					.then((result) => {
-						console.log(result);
-					});
-			},
-			deletarConta() {
-				this.$http
-					.delete(this.baseURI + "/" + this.data.id)
-					.then((result) => {
-						auth.sair();
-						this.$router.replace("/");
-					})
-					.catch((e) => {
-						console.log(e);
-					});
-			},
-			deletarPet(id) {
-				this.$http
-					.delete(this.baseURI2 + "/" + id)
-					.then((result) => {
-						location.reload();
-					})
-					.catch((e) => {
-						console.log(e);
-					});
-			},
-			selecionarPets() {
-				this.$http
-					.get(this.baseURI2 + "/search?id_user=" + this.data.id)
-					.then((result) => {
-						pets = result.data;
-					})
-					.catch(function (error) {
-						console.log(error);
-					});
-			},
+		deletarConta() {
+			this.$http
+				.delete(this.baseURI + "/" + this.data.id)
+				.then((result) => {
+					auth.sair();
+					this.$router.replace("/");
+				})
+				.catch((e) => {
+					console.log(e);
+				});
 		},
-		created: function () {
-			if (this.$session.exists()) {
-				this.data = JSON.parse(this.$session.get("user"));
-				//console.log(this.$session.get("user"));
-				//this.$http.get(this.baseURI + "/" + user.id).then((result) => {
-				//this.data = result.data;
-				//});
-			} else {
-				this.$router.replace("/");
-			}
+		deletarPet(id) {
+			this.$http
+				.delete(this.baseURI2 + "/" + id)
+				.then((result) => {
+					location.reload();
+				})
+				.catch((e) => {
+					console.log(e);
+				});
 		},
-		mounted: function () {
+		selecionarPets() {
 			this.$http
 				.get(this.baseURI2 + "/search?id_user=" + this.data.id)
 				.then((result) => {
-					//console.log(this.pets);
-					this.pets = result.data;
+					pets = result.data;
 				})
 				.catch(function (error) {
-					console.log(this.data);
 					console.log(error);
 				});
 		},
-	};
+	},
+	created: function () {
+		if (this.$session.exists()) {
+			this.data = JSON.parse(this.$session.get("user"));
+			//console.log(this.$session.get("user"));
+			//this.$http.get(this.baseURI + "/" + user.id).then((result) => {
+			//this.data = result.data;
+			//});
+		} else {
+			this.$router.replace("/");
+		}
+	},
+	mounted: function () {
+		this.$http
+			.get(this.baseURI2 + "/search?id_user=" + this.data.id)
+			.then((result) => {
+				//console.log(this.pets);
+				this.pets = result.data;
+			})
+			.catch(function (error) {
+				console.log(this.data);
+				console.log(error);
+			});
+	},
+};
 </script>
 <style>
-	.profile {
+.profile {
 	width: 250px;
 	height: 250px;
 	object-fit: cover;
 	object-position: top;
-	}
-	.profileT {
+}
+.profileT {
 	max-width: 200px;
 	max-height: 150px;
 	width: auto;
 	height: auto;
-	}
-	.divs {
+}
+.divs {
 	margin-block-end: 10px;
-	}
+}
 </style>

@@ -14,8 +14,8 @@
 				<div class="col-4" v-for="pet in pets" :key="pet.id">
 					<div class="card mb-2">
 						<img
-							class="card-img-top rounded mx-auto d-block rounded mt-2 usuario"
-							:src="'uploads/pet/' + +pet.id"
+							class="card-img-top rounded mx-auto d-block rounded mt-2"
+							:src="'uploads/pet/' +pet.id"
 							alt="Imagem de capa do card"
 							onerror="this.src='static/pet.png'"
 						/>
