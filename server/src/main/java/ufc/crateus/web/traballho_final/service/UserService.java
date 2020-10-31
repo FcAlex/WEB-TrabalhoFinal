@@ -96,4 +96,12 @@ public class UserService {
 		}
 		return userRepo.findByEmailandPassword(email, senha);
 	}
+
+	public List<User> getQtdUser(Integer qtd) {
+		return userRepo.findUserQtd(qtd);
+	}
+
+	public List<User> getNameUser(String name) {
+		return userRepo.findUserName(name);
+	}
 }

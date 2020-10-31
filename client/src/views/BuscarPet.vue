@@ -74,7 +74,7 @@ export default {
 	},
 	created() {
 		this.$http
-			.get(this.baseURI + "/search?nome=" + this.nomePet)
+			.get(this.baseURI + "/search?marca=" + this.nomePet)
 			.then((result) => {
 				this.pets = result.data;
 			})

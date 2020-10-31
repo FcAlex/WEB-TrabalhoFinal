@@ -32,6 +32,7 @@
 											data-target="#verDono"
 											id="dono"
 										>
+											<small><i class="fa fa-info-circle" aria-hidden="true"></i></small>
 											{{ user.firstName }}
 											{{ user.lastName }}
 										</h6>

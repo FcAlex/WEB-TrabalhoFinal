@@ -39,8 +39,8 @@ public class PetController {
 	        return new ResponseEntity<List<Pet>> (petService.getById_user(id_user), HttpStatus.OK);
 	    }
 	    
-	    @RequestMapping(method = RequestMethod.GET, value = "/search", params="nome")
-	    public ResponseEntity<List<Pet>>  getPetByRaca(@RequestParam("nome") String nome) {
+	    @RequestMapping(method = RequestMethod.GET, value = "/search", params="marca")
+	    public ResponseEntity<List<Pet>>  getPetByRaca(@RequestParam("marca") String nome) {
 	        return new ResponseEntity<List<Pet>> (petService.getPetByRaca(nome), HttpStatus.OK);
 	    }
 	 

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ufc.crateus.web.traballho_final.model.Pet;
 import ufc.crateus.web.traballho_final.model.User;
 import ufc.crateus.web.traballho_final.service.UserService;
 
@@ -37,10 +39,18 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "{id}")
 	public ResponseEntity<User> getUser(@Valid @PathVariable("id") Integer id) {
-		System.out.println("djas");
 		ResponseEntity<User> er = new ResponseEntity<User>(userService.getUser(id), HttpStatus.OK);
-		System.out.println("fj");
 		return er;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/search", params = "qtd")
+	public ResponseEntity<List<User>> getUserQtd(@RequestParam("qtd") Integer qtd) {
+		return new ResponseEntity<>(userService.getQtdUser(qtd), HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/search", params = "nome")
+	public ResponseEntity<List<User>> getUserNome(@RequestParam("nome") String name) {
+		return new ResponseEntity<>(userService.getNameUser(name), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
