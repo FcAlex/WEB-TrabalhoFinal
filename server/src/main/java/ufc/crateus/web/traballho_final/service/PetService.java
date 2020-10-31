@@ -63,4 +63,12 @@ public class PetService {
 	public List<Pet> getPetByRaca(String nome) {
 		return petRepo.findByRaca(nome);
 	}
+	
+	public List<Pet> getPetByNome(String nome) {
+		return petRepo.findPetsName(nome);
+	}
+
+	public List<Pet> getQtdPet(Integer qtd) {
+		return petRepo.findPetsQtd(qtd);
+	}
 }

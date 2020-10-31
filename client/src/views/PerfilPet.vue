@@ -4,7 +4,6 @@
 		<section class="container mx-auto my-4">
 			<div class="row">
 				<div class="col-4">
-					<!--<form class="form form-vertical" action="post">-->
 					<div class="center-block">
 						<img
 							:src="'uploads/pet/' + pet.id"
@@ -13,7 +12,6 @@
 							onerror="this.src='static/pet.png'"
 						/>
 					</div>
-					<!--</form>-->
 				</div>
 
 				<div class="col-8">
@@ -32,7 +30,12 @@
 											data-target="#verDono"
 											id="dono"
 										>
-											<small><i class="fa fa-info-circle" aria-hidden="true"></i></small>
+											<small
+												><i
+													class="fa fa-info-circle"
+													aria-hidden="true"
+												></i
+											></small>
 											{{ user.firstName }}
 											{{ user.lastName }}
 										</h6>
@@ -79,12 +82,7 @@
 				</div>
 			</div>
 
-			<div
-				class="modal fade"
-				id="verDono"
-				tabindex="-1"
-				role="dialog"
-			>
+			<div class="modal fade" id="verDono" tabindex="-1" role="dialog">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -120,7 +118,7 @@ export default {
 	components: {
 		Header,
 		Footer,
-		Usuario
+		Usuario,
 	},
 	data: function () {
 		return {
@@ -160,7 +158,8 @@ export default {
 
 <style>
 img.pet {
-	width: 300px;
+	width: 100%;
+	max-width: 300px;
 	height: 300px;
 	object-fit: cover;
 	object-position: top;

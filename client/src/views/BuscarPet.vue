@@ -4,6 +4,7 @@
 		<section class="container text-center p-4">
 			<h1><i class="fa fa-paw"></i> Encontre seu novo amigo</h1>
 			<hr class="mt-3 mb-4" />
+
 			<div v-show="pets == ''" class="my-4">
 				<h3 class="h4 text-center">
 					<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
@@ -14,9 +15,10 @@
 				<div class="col-4" v-for="pet in pets" :key="pet.id">
 					<div class="card mb-2">
 						<img
-							class="card-img-top rounded mx-auto d-block rounded mt-2"
+							class="rounded-circle img-thumbnail usuario mx-auto d-block mt-3"
 							:src="'uploads/pet/' +pet.id"
 							alt="Imagem de capa do card"
+							id="pet"
 							onerror="this.src='static/pet.png'"
 						/>
 
@@ -74,7 +76,7 @@ export default {
 	},
 	created() {
 		this.$http
-			.get(this.baseURI + "/search?marca=" + this.nomePet)
+			.get(this.baseURI + "/search?raca=" + this.nomePet)
 			.then((result) => {
 				this.pets = result.data;
 			})
@@ -86,4 +88,10 @@ export default {
 </script>
 
 <style>
+#pet {
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
+	object-position: top;
+}
 </style>

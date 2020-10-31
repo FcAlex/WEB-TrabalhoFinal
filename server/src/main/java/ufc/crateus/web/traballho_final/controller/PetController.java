@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ufc.crateus.web.traballho_final.model.Pet;
+import ufc.crateus.web.traballho_final.model.User;
 import ufc.crateus.web.traballho_final.service.PetService;
 
 @RestController
@@ -39,10 +40,20 @@ public class PetController {
 	        return new ResponseEntity<List<Pet>> (petService.getById_user(id_user), HttpStatus.OK);
 	    }
 	    
-	    @RequestMapping(method = RequestMethod.GET, value = "/search", params="marca")
-	    public ResponseEntity<List<Pet>>  getPetByRaca(@RequestParam("marca") String nome) {
+	    @RequestMapping(method = RequestMethod.GET, value = "/search", params="raca")
+	    public ResponseEntity<List<Pet>>  getPetByRaca(@RequestParam("raca") String nome) {
 	        return new ResponseEntity<List<Pet>> (petService.getPetByRaca(nome), HttpStatus.OK);
 	    }
+	    
+	    @RequestMapping(method = RequestMethod.GET, value = "/search", params = "qtd")
+		public ResponseEntity<List<Pet>> getUserQtd(@RequestParam("qtd") Integer qtd) {
+			return new ResponseEntity<>(petService.getQtdPet(qtd), HttpStatus.OK);
+		}
+		
+		@RequestMapping(method = RequestMethod.GET, value = "/search", params = "nome")
+		public ResponseEntity<List<Pet>> getUserNome(@RequestParam("nome") String name) {
+			return new ResponseEntity<List<Pet>>(petService.getPetByNome(name), HttpStatus.OK);
+		}
 	 
 	    @RequestMapping(method = RequestMethod.POST)
 	    public ResponseEntity<Pet> addPet(@RequestBody Pet pet) {

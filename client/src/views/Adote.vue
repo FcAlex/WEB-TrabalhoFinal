@@ -4,6 +4,59 @@
 		<section class="container text-center p-4">
 			<h1><i class="fa fa-paw"></i> Encontre seu novo amigo</h1>
 			<hr class="mt-3 mb-4" />
+			<div class="row d-flex justify-content-center">
+				<div class="col-4">
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-filter" aria-hidden="true"></i>
+							</div>
+						</div>
+						<input
+							type="number"
+							class="form-control"
+							placeholder="Indique a qtd"
+							v-model="qtd"
+						/>
+						<div class="input-group-append">
+							<button
+								type="button"
+								class="btn btn-success"
+								@click="qtdPet"
+							>
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-4">
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-filter" aria-hidden="true"></i>
+							</div>
+						</div>
+						<input
+							type="text"
+							class="form-control"
+							placeholder="Indique o nome"
+							v-model="nome"
+						/>
+						<div class="input-group-append">
+							<button
+								type="button"
+								class="btn btn-success"
+								@click="nomePet"
+							>
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr class="mt-3 mb-4" />
+
 			<div id="addCardsPets" class="row">
 				<div class="col-4" v-for="pet in pets" :key="pet.id">
 					<div class="card mb-2">
@@ -59,6 +112,8 @@ export default {
 	data() {
 		return {
 			pets: [],
+			nome: "",
+			qtd: 0,
 			baseURI: "http://localhost:8080/api/pets",
 		};
 	},
@@ -67,7 +122,28 @@ export default {
 			this.pets = result.data;
 		});
 	},
-	methods: {},
+	methods: {
+		qtdPet() {
+			this.$http
+				.get(this.baseURI + "/search?qtd=" + this.qtd)
+				.then((result) => {
+					this.pets = result.data;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+		},
+		nomePet() {
+			this.$http
+				.get(this.baseURI + "/search?nome=" + this.nome.trim())
+				.then((result) => {
+					this.pets = result.data;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+		},
+	},
 };
 </script>
 
