@@ -94,7 +94,7 @@
 			<div v-if="users == ''">
 				<h3 class="h4 text-center">
 					<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-					Você não possui pets cadastrados!
+					Você não possui usuários cadastrados!
 				</h3>
 			</div>
 		</section>

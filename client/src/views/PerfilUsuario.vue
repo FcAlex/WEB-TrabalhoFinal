@@ -26,7 +26,7 @@
 								name="image"
 								ref="image"
 								accept="image/*"
-								@change="selecionarImagem()"
+								@change="selecionarImagem"
 							/>
 						</div>
 					</div>
@@ -244,7 +244,19 @@
 															<h5
 																class="text-weight-bold"
 															>
-																{{ pet.nome }}
+																<router-link
+																	:to="{
+																		name:
+																			'perfilPet',
+																		params: {
+																			id:
+																				pet.id,
+																		},
+																	}"
+																	>{{
+																		pet.nome
+																	}}</router-link
+																>
 															</h5>
 															<p>
 																<strong>
@@ -281,369 +293,6 @@
 													{{ pet.historia }}
 												</p>
 											</div>
-											<div>
-												<h6>Ações</h6>
-												<hr />
-												<button
-													type="button"
-													class="btn btn-success"
-													data-toggle="modal"
-													data-target="#deletarPet"
-												>
-													<i
-														class="fa fa-check-circle-o"
-														aria-hidden="true"
-													></i>
-													Adotado!
-												</button>
-												<button
-													type="button"
-													class="btn btn-info mx-2"
-													data-toggle="modal"
-													data-target="#alterarPet"
-												>
-													<i
-														class="fa fa-wrench"
-														aria-hidden="true"
-													></i>
-													Alterar dados
-												</button>
-												<div
-													class="modal fade"
-													id="deletarPet"
-												>
-													<div
-														class="modal-dialog modal-dialog-centered"
-														role="document"
-													>
-														<div
-															class="modal-content"
-														>
-															<div
-																class="modal-header"
-															>
-																<h5
-																	class="modal-title"
-																>
-																	<i
-																		class="fa fa-star"
-																		aria-hidden="true"
-																	></i>
-																	Adotado!
-																</h5>
-																<button
-																	type="button"
-																	class="close"
-																	data-dismiss="modal"
-																	aria-label="Close"
-																>
-																	<span
-																		aria-hidden="true"
-																		>&times;</span
-																	>
-																</button>
-															</div>
-															<div
-																class="modal-body"
-															>
-																<div
-																	class="alert alert-success"
-																	role="alert"
-																>
-																	Que ótimo!
-																	Os dados
-																	serão
-																	removidos da
-																	lista de
-																	pets para
-																	adoção.
-																</div>
-															</div>
-															<div
-																class="modal-footer"
-															>
-																<button
-																	type="button"
-																	class="btn btn-primary"
-																	data-dismiss="modal"
-																>
-																	Voltar
-																</button>
-																<button
-																	type="button"
-																	class="btn btn-success"
-																	@click="
-																		deletarPet(
-																			pet.id
-																		)
-																	"
-																	data-dismiss="modal"
-																>
-																	Confirmar
-																</button>
-															</div>
-														</div>
-													</div>
-												</div>
-
-												<div
-													class="modal fade"
-													id="alterarPet"
-												>
-													<div
-														class="modal-dialog modal-lg"
-														role="document"
-													>
-														<div
-															class="modal-content"
-														>
-															<div
-																class="modal-header"
-															>
-																<h5
-																	class="modal-title"
-																>
-																	Alterar
-																	Dados
-																</h5>
-																<button
-																	type="button"
-																	class="close"
-																	data-dismiss="modal"
-																	aria-label="Close"
-																>
-																	<span
-																		aria-hidden="true"
-																		>&times;</span
-																	>
-																</button>
-															</div>
-															<div
-																class="modal-body"
-															>
-																<section
-																	class="container text-center p-4"
-																>
-																	<div
-																		class="card border-0"
-																	>
-																		<div
-																			class="row pt-4"
-																		>
-																			<div
-																				class="form-group col"
-																			>
-																				<label
-																					for="nomePet"
-																					>Nome/Apelido
-																					do
-																					Pet</label
-																				>
-																				<input
-																					type="text"
-																					class="form-control"
-																					id="nome"
-																					v-model="
-																						atualizar.nome
-																					"
-																					required
-																				/>
-																			</div>
-
-																			<div
-																				class="form-group col"
-																			>
-																				<label
-																					for="nomePet"
-																					>Raça</label
-																				>
-																				<input
-																					type="text"
-																					class="form-control"
-																					id="raca"
-																					v-model="
-																						atualizar.raca
-																					"
-																					required
-																				/>
-																			</div>
-																			<div
-																				class="form-group col"
-																			>
-																				<label
-																					for="porteCadastro"
-																					>Porte</label
-																				>
-																				<select
-																					id="porte"
-																					v-model="
-																						atualizar.porte
-																					"
-																					class="form-control"
-																					required
-																				>
-																					<option
-																						selected
-																					>
-																						Escolher...
-																					</option>
-																					<option
-																						value="Pequeno"
-																					>
-																						Pequeno
-																					</option>
-																					<option
-																						value="Médio"
-																					>
-																						Médio
-																					</option>
-																					<option
-																						value="Grande"
-																					>
-																						Grande
-																					</option>
-																				</select>
-																			</div>
-																			<div
-																				class="form-group col"
-																			>
-																				<label
-																					for="SexoCadastro"
-																					>Sexo</label
-																				>
-																				<select
-																					id="sexo"
-																					v-model="
-																						atualizar.sexo
-																					"
-																					class="form-control"
-																					required
-																				>
-																					<option
-																						selected
-																					>
-																						Escolher...
-																					</option>
-																					<option
-																						value="Macho"
-																					>
-																						Macho
-																					</option>
-																					<option
-																						value="Fêmea"
-																					>
-																						Fêmea
-																					</option>
-																				</select>
-																			</div>
-																		</div>
-
-																		<div
-																			class="form-group"
-																		>
-																			<label
-																				for="historia"
-																				>Caracteristicas</label
-																			>
-																			<textarea
-																				class="form-control"
-																				id="caracteristicas"
-																				v-model="
-																					atualizar.caracteristicas
-																				"
-																				rows="4"
-																				placeholder="Descreva as principais características do pet."
-																				required
-																			></textarea>
-																		</div>
-
-																		<div
-																			class="form-group"
-																		>
-																			<label
-																				for="historia"
-																				>História</label
-																			>
-																			<textarea
-																				class="form-control"
-																				id="historia"
-																				v-model="
-																					atualizar.historia
-																				"
-																				rows="4"
-																				placeholder="Descreva a história do seu pet e os motivos que para a doar."
-																				required
-																			></textarea>
-																		</div>
-																		<div
-																			class="container"
-																		></div>
-																		<div
-																			class="d-flex justify-content-start"
-																		>
-																			<div
-																				class="input-group mr-auto p-2 bd-highlight"
-																			>
-																				<div
-																					class="form-group"
-																				>
-																					<input
-																						type="file"
-																						id="file"
-																						@change="
-																							imagePath(
-																								$event
-																							)
-																						"
-																					/>
-																				</div>
-																			</div>
-
-																			<div
-																				class="alert alert-info"
-																				role="alert"
-																			>
-																				<p>
-																					Os
-																					campos
-																					em
-																					branco
-																					não
-																					serão
-																					atualizados!
-																				</p>
-																			</div>
-																		</div>
-																	</div>
-																</section>
-															</div>
-															<div
-																class="modal-footer"
-															>
-																<button
-																	type="button"
-																	class="btn btn-primary"
-																	data-dismiss="modal"
-																>
-																	Voltar
-																</button>
-																<button
-																	type="button"
-																	class="btn btn-success"
-																	@click="
-																		atualizarPet(
-																			pet
-																		)
-																	"
-																	data-dismiss="modal"
-																>
-																	Confirmar
-																</button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
 										</div>
 									</div>
 								</div>
@@ -672,15 +321,6 @@ export default {
 			pets: [],
 			file: "",
 			data: "",
-			atualizar: {
-				nome: "",
-				raca: "",
-				porte: "",
-				sexo: "",
-				caracteristicas: "",
-				historia: "",
-				id_user: "",
-			},
 			baseURI: "http://localhost:8080/api/users",
 			baseURI2: "http://localhost:8080/api/pets",
 			baseUploadURI: "http://localhost:8080/api/upload",
@@ -688,17 +328,15 @@ export default {
 	},
 	methods: {
 		selecionarImagem() {
+			this.file = this.$refs.image.files[0];
 			this.handleFileUpload(this.data.id);
 			location.reload();
 		},
 		handleFileUpload(id) {
-			this.file = this.$refs.image.files[0];
-
 			let form = new FormData();
 			form.append("resource", "user");
 			form.append("id", id);
 			form.append("file", this.file);
-
 			this.$http
 				.put(this.baseUploadURI, form, {
 					headers: {
@@ -720,16 +358,6 @@ export default {
 					console.log(e);
 				});
 		},
-		deletarPet(id) {
-			this.$http
-				.delete(this.baseURI2 + "/" + id)
-				.then((result) => {
-					location.reload();
-				})
-				.catch((e) => {
-					console.log(e);
-				});
-		},
 		selecionarPets() {
 			this.$http
 				.get(this.baseURI2 + "/search?id_user=" + this.data.id)
@@ -739,20 +367,6 @@ export default {
 				.catch(function (error) {
 					console.log(error);
 				});
-		},
-		atualizarPet(pet) {
-			let obj = {
-				nome: this.atualizar.nome == "" ? pet.nome : this.atualizar.nome, 
-				raca: this.atualizar.raca == "" ? pet.raca : this.atualizar.raca,
-				porte: this.atualizar.porte == "" ? pet.porte : this.atualizar.porte,
-				sexo: this.atualizar.sexo == "" ? pet.sexo : this.atualizar.sexo,
-				caracteristicas: this.atualizar.caracteristicas == "" ? pet.caracteristicas : this.atualizar.caracteristicas,
-				historia: this.atualizar.historia == "" ? pet.historia : this.atualizar.historia,
-				id_user: this.data.id,
-			};
-			this.$http.put(this.baseURI2 + "/" + pet.id, obj).then((result) => {
-				location.reload();
-			});
 		},
 	},
 	created: function () {

@@ -62,7 +62,7 @@
 					<div class="card mb-2">
 						<img 
 							:src="'uploads/pet/' + pet.id"
-							class="rounded-circle img-thumbnail usuario mx-auto d-block"
+							class="rounded-circle img-thumbnail usuario mx-auto d-block mt-3"
 							alt="Imagem do Usuário"
 							onerror="this.src='static/pet.png'"
 						/>
@@ -149,6 +149,9 @@ export default {
 
 <style>
 a {
+	color: inherit;
+}
+a:hover {
 	color: inherit;
 }
 img.usuario {

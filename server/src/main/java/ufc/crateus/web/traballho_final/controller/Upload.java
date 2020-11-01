@@ -23,7 +23,7 @@ public class Upload {
 	String folder;
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<Void> uploadFile (String resource, String id, MultipartFile file) throws IOException {
+	public ResponseEntity<Void> uploadFile(String resource, String id, MultipartFile file) throws IOException {
 		
 		try {
 			new FileUtil().uploadFile(file.getInputStream(), folder, resource, id);

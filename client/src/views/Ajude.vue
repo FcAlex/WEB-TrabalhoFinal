@@ -142,7 +142,7 @@ export default {
 			baseURI: "http://localhost:8080/api/users",
 			baseURI2: "http://localhost:8080/api/pets",
 			baseUploadURI: "http://localhost:8080/api/upload",
-			file: null,
+			file: "",
 			pet: {},
 			campos: false,
 			user: {},
@@ -152,14 +152,12 @@ export default {
 	created: function () {
 		if (this.$session.exists()) {
 			this.user = JSON.parse(this.$session.get("user"));
-			console.log(this.user);
-			
 			this.id_user = this.user.id;
 		}
 	},
 	methods: {
-		imagePath(event) {
-			this.file = event.target.files[0];
+		imagePath(e) {
+			this.file = e.target.files[0];
 		},
 		handleFileUpload(id) {
 			
@@ -167,6 +165,7 @@ export default {
 				alert("ERROR")
 				return;
 			}
+
 			let form = new FormData();
 			form.append("resource", "pet");
 			form.append("id", id);
@@ -214,7 +213,7 @@ export default {
 						
 					// };
 					this.$http.post(this.baseURI2, obj).then((result) => {
-							
+							this.handleFileUpload(result.data.id);
 					});
 					
 					// this.$http.put(this.baseURI + "/" + this.id_user, obj2).then((result) => {
